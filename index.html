@@ -1023,8 +1023,8 @@ body {
 
         <!-- 산업군 × 대응 깊이 -->
         <div class="card">
-          <div class="card-title">산업 Tier × 대응 깊이<span class="ann-dot">1</span></div>
-          <div class="card-sub">건수 기준. 어느 산업이 어느 단계까지 가는가.</div>
+          <div class="card-title">리드 등급 × 대응 깊이<span class="ann-dot">1</span></div>
+          <div class="card-sub">건수 기준. 등급별로 어느 단계까지 가는가. 1등급이 더 깊이 간다면 시니어 전담 운영 효과 증명.</div>
           <div class="heatmap" style="margin-top: 16px;">
             <div class="hm-header" style="grid-template-columns: 100px repeat(4, 1fr);">
               <div></div>
@@ -1034,24 +1034,24 @@ body {
               <div>④ 계약</div>
             </div>
             <div class="hm-row" style="grid-template-columns: 100px repeat(4, 1fr);">
-              <div class="hm-label">Tier 1 (금융·공공·유통·제조)</div>
+              <div class="hm-label">1등급 (최우선 QL)</div>
               <div class="hm-cell hm-l3">18</div>
               <div class="hm-cell hm-l3">15</div>
-              <div class="hm-cell hm-l2">7</div>
-              <div class="hm-cell hm-l2">2</div>
+              <div class="hm-cell hm-l2">9</div>
+              <div class="hm-cell hm-l2">3</div>
             </div>
             <div class="hm-row" style="grid-template-columns: 100px repeat(4, 1fr);">
-              <div class="hm-label">Tier 2 (IT·의료·교육·미디어)</div>
+              <div class="hm-label">2등급 (QL)</div>
               <div class="hm-cell hm-l2">14</div>
               <div class="hm-cell hm-l2">10</div>
-              <div class="hm-cell hm-l1">4</div>
-              <div class="hm-cell hm-l1">1</div>
+              <div class="hm-cell hm-l1">3</div>
+              <div class="hm-cell hm-l0">0</div>
             </div>
             <div class="hm-row" style="grid-template-columns: 100px repeat(4, 1fr);">
-              <div class="hm-label">unknown (분류 미확정)</div>
+              <div class="hm-label">3등급 (QL)</div>
               <div class="hm-cell hm-l1">9</div>
               <div class="hm-cell hm-l1">6</div>
-              <div class="hm-cell hm-l1">1</div>
+              <div class="hm-cell hm-l0">0</div>
               <div class="hm-cell hm-l0">0</div>
             </div>
           </div>
@@ -1063,7 +1063,7 @@ body {
             <div class="item"><div class="sw" style="background:#E94B6A;"></div>16+</div>
           </div>
           <div style="margin-top: 14px; padding: 10px 12px; background: #FDFBF9; border-radius: 6px; font-size: 11px; color: #6B7280; line-height: 1.5;">
-            <b style="color:#B81D3A;">해석 팁.</b> Tier 1이 미팅·계약 단계까지 잘 간다면 Tier 1 중심 콘텐츠 유지. Tier 2가 초기에서 멈춘다면 Tier 2 니즈 맞춤 콘텐츠 보강.
+            <b style="color:#B81D3A;">해석 팁.</b> 1등급이 미팅·계약까지 뚜렷하게 더 간다면 시니어 전담(@도헌, @지석) 운영이 효과적이라는 증명. 2·3등급 간 격차가 크다면 산업 FIT 조건의 실질적 변별력을 확인.
           </div>
         </div>
 
@@ -1131,7 +1131,7 @@ body {
       <!-- 문의 유형 × 대응 깊이 -->
       <div class="card" style="margin-top:16px;">
         <div class="card-title">문의 유형 × 대응 깊이<span class="ann-dot">3</span></div>
-        <div class="card-sub">기존 리드 현황 대시보드의 문의 유형 분류(상담·영업·NOA(AI)·기술 연동·기타)를 재사용하여 대응 깊이 교차</div>
+        <div class="card-sub">기존 리드 현황 대시보드의 문의 유형 분류(상담·협업·NOA(AI)·기술 연동·기타)를 재사용하여 대응 깊이 교차</div>
         <div class="heatmap" style="margin-top: 16px;">
           <div class="hm-header" style="grid-template-columns: 140px repeat(4, 1fr) 80px;">
             <div></div>
@@ -1150,7 +1150,7 @@ body {
             <div style="text-align:center; font-weight:700; color:#B81D3A; padding:14px;">13.3%</div>
           </div>
           <div class="hm-row" style="grid-template-columns: 140px repeat(4, 1fr) 80px;">
-            <div class="hm-label">영업</div>
+            <div class="hm-label">협업</div>
             <div class="hm-cell hm-l2">10</div>
             <div class="hm-cell hm-l2">8</div>
             <div class="hm-cell hm-l1">4</div>
@@ -1183,7 +1183,7 @@ body {
           </div>
         </div>
         <div style="margin-top: 14px; padding: 10px 12px; background: #FDFBF9; border-radius: 6px; font-size: 11px; color: #6B7280; line-height: 1.5;">
-          <b style="color:#B81D3A;">해석 팁.</b> 상담·영업 유형에서 주로 계약 발생. NOA(AI)·기술 연동은 초기 단계는 나오지만 계약까지 못 가는 구조 — 도입 의사결정 과정에서 추가 설득 자산이 필요.
+          <b style="color:#B81D3A;">해석 팁.</b> 상담·협업 유형에서 주로 계약 발생. NOA(AI)·기술 연동은 초기 단계는 나오지만 계약까지 못 가는 구조 — 도입 의사결정 과정에서 추가 설득 자산이 필요.
         </div>
       </div>
 
@@ -1192,9 +1192,9 @@ body {
 
   <div class="annotations">
     <h3>주요 인터랙션</h3>
-    <div class="annotation-item"><div class="num">1</div><div>산업 Tier 분류는 LeadFlow 리드 판단 자동화에서 이미 부여한 값을 그대로 사용. 신규 로직 없음.</div></div>
+    <div class="annotation-item"><div class="num">1</div><div>리드 등급(1·2·3등급)은 LeadFlow 리드 판단 자동화에서 이미 부여한 값을 그대로 사용. 신규 로직 없음. 1등급 = 최우선 QL (직원 100인↑ + 매출 100억↑), 2등급 = QL, 3등급 = QL (1·2등급 조건 미달).</div></div>
     <div class="annotation-item"><div class="num">2</div><div>셀 클릭 시 해당 조건의 리드 목록 팝업. 팝업 내 리드 클릭 시 화면 2(타임라인)로 이동.</div></div>
-    <div class="annotation-item"><div class="num">3</div><div>문의 유형은 기존 리드 현황 대시보드에서 이미 분류되어 있는 '상담 · 영업 · NOA(AI) · 기술 연동 · 기타' 값을 그대로 재사용. 신규 분류 로직 없음. 계약률 = 위닝 건수 ÷ 쓰레드 응답 건수.</div></div>
+    <div class="annotation-item"><div class="num">3</div><div>문의 유형은 기존 리드 현황 대시보드에서 이미 분류되어 있는 '상담 · 협업 · NOA(AI) · 기술 연동 · 기타' 값을 그대로 재사용. 신규 분류 로직 없음. 계약률 = 위닝 건수 ÷ 쓰레드 응답 건수.</div></div>
   </div>
 
 </div>
@@ -1320,7 +1320,7 @@ body {
             <div>
               <div class="mini-chart-title">문의 유형</div>
               <div class="mini-bar"><div class="label">상담</div><div class="track"><div class="fill" style="width:67%;"></div></div><div class="count">2</div></div>
-              <div class="mini-bar"><div class="label">영업</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
+              <div class="mini-bar"><div class="label">협업</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
               <div class="mini-bar"><div class="label">NOA(AI)</div><div class="track"><div class="fill" style="width:0%;"></div></div><div class="count">0</div></div>
             </div>
 
