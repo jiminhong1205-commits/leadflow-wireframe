@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>LeadFlow 영업 파이프라인 대시보드 — 와이어프레임</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Malgun Gothic", "맑은 고딕", -apple-system, sans-serif;
+  background: #FAF7F3;
+  color: #1F1F1F;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.container { max-width: 1440px; margin: 0 auto; padding: 40px 20px; }
+
+/* ---------- 문서 헤더 ---------- */
+.doc-header {
+  background: white;
+  border-radius: 12px;
+  padding: 32px 40px;
+  margin-bottom: 24px;
+  border: 1px solid #F0E8E2;
+}
+.doc-header .badge {
+  display: inline-block;
+  background: #FDF2F5;
+  color: #B81D3A;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+.doc-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.doc-header .sub { color: #6B7280; font-size: 14px; }
+.doc-header .meta {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #F0E8E2;
+  display: flex;
+  gap: 32px;
+  font-size: 13px;
+  color: #6B7280;
+}
+.doc-header .meta b { color: #1F1F1F; margin-right: 6px; }
+
+/* ---------- 화면 탭 ---------- */
+.tabs {
+  display: flex;
+  gap: 4px;
+  background: white;
+  padding: 6px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #F0E8E2;
+}
+.tab {
+  flex: 1;
+  padding: 12px 20px;
+  text-align: center;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 13px;
+  color: #6B7280;
+  transition: all 0.15s;
+  user-select: none;
+}
+.tab.active {
+  background: #E94B6A;
+  color: white;
+  font-weight: 600;
+}
+.tab:not(.active):hover { background: #FAF7F3; }
+
+/* ---------- 화면 섹션 ---------- */
+.screen { display: none; }
+.screen.active { display: block; }
+.screen-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+.screen-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+}
+.screen-header .desc { color: #6B7280; font-size: 13px; margin-top: 4px; }
+
+/* 기간 필터 (Metabase 스타일) */
+.period-filter {
+  display: flex;
+  gap: 4px;
+  background: white;
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid #F0E8E2;
+}
+.period-filter button {
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  border-radius: 5px;
+  font-size: 12px;
+  color: #6B7280;
+  cursor: pointer;
+  font-family: inherit;
+}
+.period-filter button.active { background: #E94B6A; color: white; font-weight: 600; }
+
+/* ---------- Metabase 스타일 레이아웃 ---------- */
+.metabase-frame {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #F0E8E2;
+  overflow: hidden;
+}
+.mb-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #F5EDE7;
+  background: #FDFBF9;
+}
+.mb-topbar .title {
+  font-size: 16px;
+  font-weight: 700;
+}
+.mb-topbar .sub {
+  font-size: 12px;
+  color: #6B7280;
+  margin-top: 2px;
+}
+.mb-content {
+  padding: 24px;
+  background: #FAF7F3;
+}
+
+/* ---------- KPI 카드 ---------- */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.kpi-card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid #F0E8E2;
+  position: relative;
+}
+.kpi-card .label {
+  font-size: 12px;
+  color: #6B7280;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.kpi-card .value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1F1F1F;
+  line-height: 1;
+}
+.kpi-card .value.accent { color: #E94B6A; }
+.kpi-card .delta {
+  font-size: 11px;
+  color: #6B7280;
+  margin-top: 8px;
+}
+.kpi-card .delta.up { color: #10A37F; }
+.kpi-card .delta.down { color: #DC2626; }
+
+/* ---------- 2열 그리드 ---------- */
+.grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.grid-2-1 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid #F0E8E2;
+}
+.card-title {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.card-sub {
+  font-size: 11px;
+  color: #6B7280;
+  margin-bottom: 16px;
+}
+
+/* ---------- 퍼널 차트 ---------- */
+.funnel {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 8px;
+}
+.funnel-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+}
+.funnel-step .bar-wrap {
+  flex: 1;
+  position: relative;
+  height: 44px;
+  display: flex;
+  align-items: center;
+}
+.funnel-step .bar {
+  height: 44px;
+  background: linear-gradient(90deg, #F8A5B5, #E94B6A);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+}
+.funnel-step .label {
+  min-width: 140px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.funnel-step .badge {
+  font-size: 11px;
+  background: #F5EDE7;
+  color: #6B7280;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+}
+.funnel-step .ratio {
+  min-width: 70px;
+  text-align: right;
+  font-size: 12px;
+  color: #6B7280;
+}
+.funnel-drop {
+  font-size: 10px;
+  color: #DC2626;
+  padding: 2px 0 2px 152px;
+}
+
+/* ---------- 등급별 막대 ---------- */
+.grade-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.grade-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.grade-bar .tag {
+  min-width: 46px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-align: center;
+}
+.tag-g1 { background: #FDF2F5; color: #B81D3A; }
+.tag-g2 { background: #FEEDF1; color: #E94B6A; }
+.tag-g3 { background: #FEF5F7; color: #E94B6A; }
+.grade-bar .track {
+  flex: 1;
+  height: 20px;
+  background: #F5EDE7;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.grade-bar .track .fill {
+  height: 100%;
+  background: linear-gradient(90deg, #F8A5B5, #E94B6A);
+}
+.grade-bar .value {
+  min-width: 52px;
+  text-align: right;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ---------- 히트맵 ---------- */
+.heatmap {
+  display: grid;
+  gap: 2px;
+  font-size: 12px;
+}
+.heatmap .hm-header {
+  display: grid;
+  gap: 2px;
+  font-weight: 600;
+  color: #6B7280;
+  font-size: 11px;
+  text-align: center;
+}
+.heatmap .hm-row {
+  display: grid;
+  gap: 2px;
+}
+.heatmap .hm-label {
+  padding: 8px;
+  font-weight: 600;
+  font-size: 11px;
+  color: #6B7280;
+  display: flex;
+  align-items: center;
+}
+.heatmap .hm-cell {
+  padding: 14px;
+  text-align: center;
+  font-weight: 600;
+  border-radius: 4px;
+  color: #1F1F1F;
+}
+.hm-l0 { background: #FAF7F3; color: #CBBAB0; }
+.hm-l1 { background: #FEF5F7; }
+.hm-l2 { background: #FCD8E0; }
+.hm-l3 { background: #F8A5B5; color: white; }
+.hm-l4 { background: #E94B6A; color: white; }
+
+/* ---------- 주석 ---------- */
+.annotations {
+  background: white;
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-top: 16px;
+  border: 1px solid #F0E8E2;
+}
+.annotations h3 {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #B81D3A;
+}
+.annotation-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #4B5563;
+}
+.annotation-item .num {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  background: #E94B6A;
+  color: white;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ann-dot {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  background: #E94B6A;
+  color: white;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  align-items: center;
+  justify-content: center;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* ---------- 타임라인 (Screen 2) ---------- */
+.timeline-wrap {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 20px;
+}
+.lead-sidebar {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #F0E8E2;
+  padding: 16px;
+  height: fit-content;
+}
+.lead-sidebar h4 {
+  font-size: 12px;
+  color: #6B7280;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.lead-item {
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  border: 1px solid transparent;
+}
+.lead-item.selected {
+  background: #FDF2F5;
+  border-color: #E94B6A;
+}
+.lead-item .company { font-weight: 600; margin-bottom: 2px; }
+.lead-item .meta { font-size: 10px; color: #6B7280; }
+
+.timeline {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #F0E8E2;
+  padding: 24px 32px;
+}
+.timeline-header {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #F5EDE7;
+  margin-bottom: 24px;
+}
+.timeline-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.timeline-header .info {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: #6B7280;
+}
+.timeline-header .info span.tag {
+  background: #FEEDF1;
+  color: #B81D3A;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.tl-layer {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 16px;
+  position: relative;
+  padding-bottom: 32px;
+}
+.tl-layer::before {
+  content: "";
+  position: absolute;
+  left: 17px;
+  top: 40px;
+  bottom: 0;
+  width: 2px;
+  background: #F5EDE7;
+}
+.tl-layer:last-child::before { display: none; }
+.tl-layer .badge {
+  width: 36px;
+  height: 36px;
+  background: #E94B6A;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  position: relative;
+  z-index: 1;
+}
+.tl-layer.empty .badge { background: #E5DACF; }
+
+.tl-card {
+  background: #FAF7F3;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #F0E8E2;
+}
+.tl-card h4 {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.tl-card .when {
+  font-size: 11px;
+  color: #6B7280;
+  margin-bottom: 10px;
+}
+.tl-card .detail {
+  font-size: 12px;
+  color: #4B5563;
+  line-height: 1.6;
+}
+.tl-card .detail-line {
+  padding: 4px 0;
+}
+.tl-card .detail-line b { color: #1F1F1F; margin-right: 6px; }
+.tl-empty {
+  color: #9CA3AF;
+  font-style: italic;
+  font-size: 12px;
+}
+
+/* ---------- 위닝 케이스 (Screen 4) ---------- */
+.winning-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.winning-list-card .list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.winning-item {
+  padding: 12px 14px;
+  background: #FAF7F3;
+  border: 1px solid #F0E8E2;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.winning-item:hover { background: #FDF2F5; border-color: #E94B6A; }
+.winning-item .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.winning-item .company { font-weight: 700; font-size: 13px; }
+.winning-item .date { font-size: 11px; color: #6B7280; }
+.winning-item .bottom {
+  display: flex;
+  gap: 6px;
+  font-size: 10px;
+  color: #6B7280;
+}
+.winning-item .chip {
+  background: #FEEDF1;
+  color: #B81D3A;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.profile-charts { display: flex; flex-direction: column; gap: 16px; }
+.mini-chart-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6B7280;
+  margin-bottom: 8px;
+}
+.mini-bar {
+  display: grid;
+  grid-template-columns: 80px 1fr 30px;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 4px;
+  font-size: 11px;
+}
+.mini-bar .label { color: #4B5563; }
+.mini-bar .track {
+  height: 12px;
+  background: #F5EDE7;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.mini-bar .fill {
+  height: 100%;
+  background: linear-gradient(90deg, #F8A5B5, #E94B6A);
+}
+.mini-bar .count { text-align: right; font-weight: 600; color: #1F1F1F; }
+
+/* ---------- 링크 배너 (두 대시보드 간 이동) ---------- */
+.link-banner {
+  background: #FDF2F5;
+  border: 1px solid #F8C6D0;
+  border-radius: 8px;
+  padding: 12px 18px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #B81D3A;
+}
+.link-banner a {
+  color: #B81D3A;
+  font-weight: 700;
+  text-decoration: none;
+}
+.link-banner a:hover { text-decoration: underline; }
+
+/* ---------- 범례 ---------- */
+.legend {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  font-size: 11px;
+  color: #6B7280;
+  justify-content: flex-end;
+}
+.legend .item { display: flex; align-items: center; gap: 5px; }
+.legend .sw { width: 12px; height: 12px; border-radius: 2px; }
+
+@media print {
+  .tabs { display: none; }
+  .screen { display: block !important; page-break-after: always; }
+  body { background: white; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- ==================== 문서 헤더 ==================== -->
+<div class="doc-header">
+  <span class="badge">LeadFlow Phase 9+ · 기획서 부록 A</span>
+  <h1>영업 파이프라인 대시보드 — 와이어프레임</h1>
+  <div class="sub">4개 화면의 레이아웃과 인터랙션. 기존 LeadFlow 리드 현황 대시보드의 시각 언어를 그대로 계승한다.</div>
+  <div class="meta">
+    <span><b>작성</b>마케팅 TFT 홍지민</span>
+    <span><b>개발 주도</b>백명구</span>
+    <span><b>데이터 자산</b>권은홍 (A Team)</span>
+    <span><b>플랫폼</b>Metabase (기존 culture.io.kr/dashboard 인스턴스 내)</span>
+  </div>
+</div>
+
+<!-- ==================== 탭 ==================== -->
+<div class="tabs">
+  <div class="tab active" data-screen="s1">화면 1 · 파이프라인 퍼널</div>
+  <div class="tab" data-screen="s2">화면 2 · 리드 여정 타임라인</div>
+  <div class="tab" data-screen="s3">화면 3 · 크로스 분석 히트맵</div>
+  <div class="tab" data-screen="s4">화면 4 · 위닝 케이스 프로파일</div>
+</div>
+
+<!-- ==================== Screen 1: 파이프라인 퍼널 ==================== -->
+<div class="screen active" id="s1">
+
+  <div class="screen-header">
+    <div>
+      <h2>화면 1 · 파이프라인 퍼널</h2>
+      <div class="desc">QL 리드가 각 대응 단계를 얼마나 통과하는지 한 화면에 보여준다. 대시보드 진입 시 기본 화면.</div>
+    </div>
+    <div class="period-filter">
+      <button>이번 달</button>
+      <button class="active">저번 달</button>
+      <button>분기</button>
+      <button>반기</button>
+      <button>연간</button>
+    </div>
+  </div>
+
+  <div class="link-banner">
+    <span>◉ 이 리드들이 얼마나 유입됐는지 먼저 보려면 →</span>
+    <a>리드 현황 대시보드로 이동</a>
+  </div>
+
+  <div class="metabase-frame">
+    <div class="mb-topbar">
+      <div>
+        <div class="title">영업 파이프라인 대시보드 — 퍼널</div>
+        <div class="sub">2026-03-01 ~ 2026-03-31 · QL(1·2·3등급) 기준 · 마지막 업데이트 4월 19일 00:00</div>
+      </div>
+      <div style="font-size: 11px; color: #6B7280;">
+        등급 필터: <b style="color:#B81D3A;">전체</b> · 산업: <b style="color:#B81D3A;">전체</b> · 채널: <b style="color:#B81D3A;">전체</b>
+      </div>
+    </div>
+    <div class="mb-content">
+
+      <!-- KPI 카드 -->
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="label">총 QL 리드<span class="ann-dot">1</span></div>
+          <div class="value">41</div>
+          <div class="delta up">↑ 5건 전월 대비</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">미팅 진행</div>
+          <div class="value">12</div>
+          <div class="delta">29.3% 도달</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">위닝 건수<span class="ann-dot">2</span></div>
+          <div class="value accent">3</div>
+          <div class="delta down">↓ 1건 전월 대비</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Time-to-Close 중앙값</div>
+          <div class="value">45</div>
+          <div class="delta">일 (위닝 기준)</div>
+        </div>
+      </div>
+
+      <!-- 퍼널 + 등급 비교 -->
+      <div class="grid-2-1">
+        <div class="card">
+          <div class="card-title">대응 깊이 퍼널<span class="ann-dot">3</span></div>
+          <div class="card-sub">QL 리드가 각 단계에 얼마나 도달하는가</div>
+          <div class="funnel">
+            <div class="funnel-step">
+              <div class="label">① 쓰레드 응답<span class="badge">L2</span></div>
+              <div class="bar-wrap"><div class="bar" style="width: 100%">41건</div></div>
+              <div class="ratio">100%</div>
+            </div>
+            <div class="funnel-drop">▼ 소개서 공유 단계에서 −24% (10건 이탈)</div>
+            <div class="funnel-step">
+              <div class="label">② 소개서/비용 안내<span class="badge">L2</span></div>
+              <div class="bar-wrap"><div class="bar" style="width: 76%">31건</div></div>
+              <div class="ratio">75.6%</div>
+            </div>
+            <div class="funnel-drop">▼ 미팅 진행 단계에서 −46% (19건 이탈)</div>
+            <div class="funnel-step">
+              <div class="label">③ 미팅 진행<span class="badge">L3</span></div>
+              <div class="bar-wrap"><div class="bar" style="width: 29%">12건</div></div>
+              <div class="ratio">29.3%</div>
+            </div>
+            <div class="funnel-drop">▼ 계약 체결 단계에서 −22% (9건 이탈)</div>
+            <div class="funnel-step">
+              <div class="label">④ 계약 체결<span class="badge">L4</span></div>
+              <div class="bar-wrap"><div class="bar" style="width: 7%">3건</div></div>
+              <div class="ratio">7.3%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">QL 등급별 전환 비교<span class="ann-dot">4</span></div>
+          <div class="card-sub">각 등급의 미팅 진행 도달률</div>
+          <div class="grade-bars" style="margin-top: 16px;">
+            <div>
+              <div style="font-size: 11px; color:#6B7280; margin-bottom: 6px;">1등급 (최우선 QL) · 5건</div>
+              <div class="grade-bar">
+                <span class="tag tag-g1">1등급</span>
+                <div class="track"><div class="fill" style="width: 80%;"></div></div>
+                <span class="value">80.0%</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-size: 11px; color:#6B7280; margin-bottom: 6px;">2등급 QL · 14건</div>
+              <div class="grade-bar">
+                <span class="tag tag-g2">2등급</span>
+                <div class="track"><div class="fill" style="width: 42%;"></div></div>
+                <span class="value">42.9%</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-size: 11px; color:#6B7280; margin-bottom: 6px;">3등급 QL · 22건</div>
+              <div class="grade-bar">
+                <span class="tag tag-g3">3등급</span>
+                <div class="track"><div class="fill" style="width: 13%;"></div></div>
+                <span class="value">13.6%</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top: 20px; padding: 10px 12px; background: #FDFBF9; border-radius: 6px; font-size: 11px; color: #6B7280; line-height: 1.5;">
+            <b style="color:#B81D3A;">해석 팁.</b> 1등급의 도달률이 뚜렷이 높으면 시니어 전담이 효과적. 2·3등급 간 격차가 크면 산업 FIT 기준의 효과.
+          </div>
+        </div>
+      </div>
+
+      <!-- Handoff Lag -->
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-title">Handoff Lag (인입 ~ 첫 대응)<span class="ann-dot">5</span></div>
+          <div class="card-sub">중앙값 3.2시간 · 24시간 초과 건 4건 (9.8%)</div>
+          <div style="margin-top: 20px; display: flex; gap: 12px; align-items: flex-end; padding: 0 10px;">
+            <div style="flex:1; text-align:center;">
+              <div style="height: 110px; display: flex; align-items: flex-end;">
+                <div style="width:100%; height:90%; background:linear-gradient(180deg,#F8A5B5,#E94B6A); border-radius:4px 4px 0 0;"></div>
+              </div>
+              <div style="font-size:11px; color:#6B7280; margin-top:8px;">1시간 내</div>
+              <div style="font-size:14px; font-weight:700; margin-top:2px;">18</div>
+            </div>
+            <div style="flex:1; text-align:center;">
+              <div style="height: 110px; display: flex; align-items: flex-end;">
+                <div style="width:100%; height:55%; background:linear-gradient(180deg,#F8A5B5,#E94B6A); border-radius:4px 4px 0 0;"></div>
+              </div>
+              <div style="font-size:11px; color:#6B7280; margin-top:8px;">~4시간</div>
+              <div style="font-size:14px; font-weight:700; margin-top:2px;">11</div>
+            </div>
+            <div style="flex:1; text-align:center;">
+              <div style="height: 110px; display: flex; align-items: flex-end;">
+                <div style="width:100%; height:40%; background:linear-gradient(180deg,#F8A5B5,#E94B6A); border-radius:4px 4px 0 0;"></div>
+              </div>
+              <div style="font-size:11px; color:#6B7280; margin-top:8px;">~24시간</div>
+              <div style="font-size:14px; font-weight:700; margin-top:2px;">8</div>
+            </div>
+            <div style="flex:1; text-align:center;">
+              <div style="height: 110px; display: flex; align-items: flex-end;">
+                <div style="width:100%; height:20%; background:#F8A5B5; border-radius:4px 4px 0 0;"></div>
+              </div>
+              <div style="font-size:11px; color:#6B7280; margin-top:8px;">24시간 +</div>
+              <div style="font-size:14px; font-weight:700; color:#DC2626; margin-top:2px;">4</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">단계별 현재 체류 리드<span class="ann-dot">6</span></div>
+          <div class="card-sub">이번 달 기준 각 단계에 머물러 있는 리드 수 (최신 액션 기준)</div>
+          <table style="width: 100%; font-size: 12px; margin-top: 12px; border-collapse: collapse;">
+            <thead>
+              <tr style="color:#6B7280; font-size:11px; border-bottom: 1px solid #F0E8E2;">
+                <th style="text-align:left; padding:8px 0;">단계</th>
+                <th style="text-align:right;">건수</th>
+                <th style="text-align:right;">평균 체류일</th>
+                <th style="text-align:right;">최장 체류</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #F5EDE7;"><td style="padding:10px 0;">쓰레드 응답 (더 나아가지 못함)</td><td style="text-align:right; font-weight:600;">10</td><td style="text-align:right; color:#6B7280;">14일</td><td style="text-align:right; color:#DC2626;">42일</td></tr>
+              <tr style="border-bottom: 1px solid #F5EDE7;"><td style="padding:10px 0;">소개서 공유 (회신 대기)</td><td style="text-align:right; font-weight:600;">19</td><td style="text-align:right; color:#6B7280;">21일</td><td style="text-align:right; color:#DC2626;">58일</td></tr>
+              <tr style="border-bottom: 1px solid #F5EDE7;"><td style="padding:10px 0;">미팅 진행 (영업 중)</td><td style="text-align:right; font-weight:600;">9</td><td style="text-align:right; color:#6B7280;">11일</td><td style="text-align:right; color:#6B7280;">31일</td></tr>
+              <tr><td style="padding:10px 0;">계약 체결 <span style="color:#6B7280; font-size:10px;">(Time-to-Close)</span></td><td style="text-align:right; font-weight:600; color:#B81D3A;">3</td><td style="text-align:right; color:#6B7280;">91일</td><td style="text-align:right; color:#6B7280;">161일</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 주석 -->
+  <div class="annotations">
+    <h3>주요 인터랙션 (개발 시 고려)</h3>
+    <div class="annotation-item"><div class="num">1</div><div>KPI 카드 클릭 시 해당 단계에 있는 리드 목록으로 필터링 (화면 1의 우측 하단 테이블로 스크롤 + 하이라이트).</div></div>
+    <div class="annotation-item"><div class="num">2</div><div>위닝 건수 카드 클릭 시 화면 4(위닝 케이스 프로파일)로 이동.</div></div>
+    <div class="annotation-item"><div class="num">3</div><div>퍼널 각 단계 바 클릭 시 해당 단계 리드 목록으로 드릴다운. 개별 리드 클릭은 화면 2(여정 타임라인)로 이동.</div></div>
+    <div class="annotation-item"><div class="num">4</div><div>등급별 막대는 1/2/3등급 각각의 미팅 단계 도달률. 카드 클릭 시 해당 등급만 필터링된 퍼널로 전환.</div></div>
+    <div class="annotation-item"><div class="num">5</div><div>Handoff Lag 히스토그램. 24시간 초과 구간이 핵심 관리 지표. 해당 막대 클릭 시 초과 리드 목록 팝업.</div></div>
+    <div class="annotation-item"><div class="num">6</div><div>'최장 체류' 값이 붉게 표시된 리드는 장기 방치 리스크 리드. 행 클릭 시 화면 2로 이동.</div></div>
+  </div>
+
+</div>
+
+<!-- ==================== Screen 2: 리드 여정 타임라인 ==================== -->
+<div class="screen" id="s2">
+
+  <div class="screen-header">
+    <div>
+      <h2>화면 2 · 리드 여정 타임라인</h2>
+      <div class="desc">개별 리드가 인입 → 대응 → 영업 활동 → 계약까지 어떻게 흘렀는지 시간순으로 보여준다. 드릴다운 화면.</div>
+    </div>
+    <div class="period-filter">
+      <button>전체 기간</button>
+      <button class="active">최근 90일</button>
+    </div>
+  </div>
+
+  <div class="metabase-frame">
+    <div class="mb-topbar">
+      <div>
+        <div class="title">리드 여정 타임라인</div>
+        <div class="sub">좌측에서 리드를 선택하면 우측에 L1~L4 여정이 수직 타임라인으로 표시됩니다</div>
+      </div>
+    </div>
+    <div class="mb-content">
+      <div class="timeline-wrap">
+
+        <!-- 리드 목록 (좌측) -->
+        <div class="lead-sidebar">
+          <h4>QL 리드 목록 <span class="ann-dot">1</span></h4>
+          <div class="lead-item">
+            <div class="company">(주)리드넘버</div>
+            <div class="meta">2025-07-07 · 전화 · 2등급</div>
+          </div>
+          <div class="lead-item selected">
+            <div class="company">하나은행</div>
+            <div class="meta">2025-05-07 · 홈페이지 · 1등급 · <span style="color:#B81D3A; font-weight:700;">위닝</span></div>
+          </div>
+          <div class="lead-item">
+            <div class="company">오토메타</div>
+            <div class="meta">2026-04-14 · NOA · 2등급</div>
+          </div>
+          <div class="lead-item">
+            <div class="company">플랜아이</div>
+            <div class="meta">2026-04-13 · 전화 · 3등급</div>
+          </div>
+          <div class="lead-item">
+            <div class="company">이노뱃</div>
+            <div class="meta">2026-04-09 · 전화 · 3등급</div>
+          </div>
+          <div class="lead-item">
+            <div class="company">더게임</div>
+            <div class="meta">2026-04-16 · 전화 · 3등급</div>
+          </div>
+        </div>
+
+        <!-- 타임라인 (우측) -->
+        <div class="timeline">
+          <div class="timeline-header">
+            <h3>하나은행 · 다국어 채팅상담 서비스 도입</h3>
+            <div class="info">
+              <span>사업자번호 209-81-00001</span>
+              <span class="tag">1등급 (최우선 QL)</span>
+              <span>산업 FIT Tier 1 (금융)</span>
+              <span>총 여정 161일</span>
+            </div>
+          </div>
+
+          <!-- L1: 리드 인입 -->
+          <div class="tl-layer">
+            <div class="badge">L1</div>
+            <div class="tl-card">
+              <h4>리드 인입 <span style="color:#6B7280; font-weight:400; font-size:11px; margin-left:8px;">#리드등록알림 봇 메시지</span></h4>
+              <div class="when">2025-05-07 09:12 · 인입 채널: 홈페이지</div>
+              <div class="detail">
+                <div class="detail-line"><b>기업명</b>하나은행</div>
+                <div class="detail-line"><b>담당자</b>김**</div>
+                <div class="detail-line"><b>문의내용</b>다국어 채팅상담 서비스 도입 검토 중. 영상예약상담까지 포함 가능한지 문의드립니다.</div>
+                <div class="detail-line"><b>긴급도</b>보통</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- L2: 1차 대응 -->
+          <div class="tl-layer">
+            <div class="badge">L2</div>
+            <div class="tl-card">
+              <h4>1차 대응 <span style="color:#6B7280; font-weight:400; font-size:11px; margin-left:8px;">#리드등록알림 쓰레드</span></h4>
+              <div class="when">2025-05-07 14:33 · 대응 lag 5시간 21분</div>
+              <div class="detail">
+                <div class="detail-line"><b>담당자</b>상현 (멘션: @도헌 @지석)</div>
+                <div class="detail-line"><b>액션 유형</b><span style="background:#FEEDF1; color:#B81D3A; padding:2px 8px; border-radius:3px; font-weight:600; font-size:11px;">제품 소개 + 비용 안내 + 미팅 제안</span></div>
+                <div class="detail-line"><b>기록 요약</b>담당자 컨택 후 대면미팅 제안. 일정 조율 중.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- L3: 영업 활동 (여러 건) -->
+          <div class="tl-layer">
+            <div class="badge">L3</div>
+            <div class="tl-card">
+              <h4>영업 활동 (3건) <span style="color:#6B7280; font-weight:400; font-size:11px; margin-left:8px;">#all-영업활동공유</span></h4>
+              <div class="when">2025-05-14 ~ 2025-07-15 · 지속 대응</div>
+              <div class="detail">
+                <div class="detail-line"><b>2025-05-14</b>대면미팅. 다국어 채팅상담 요건 확인 및 데모 시연</div>
+                <div class="detail-line"><b>2025-06-03</b>RFP 수령 및 가격 협의</div>
+                <div class="detail-line"><b>2025-07-15</b>최종 기술 협의 및 계약 조건 확정</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- L4: 계약 -->
+          <div class="tl-layer">
+            <div class="badge">L4</div>
+            <div class="tl-card" style="border-color:#E94B6A; background:#FDF2F5;">
+              <h4 style="color:#B81D3A;">🎉 계약 체결 <span style="color:#6B7280; font-weight:400; font-size:11px; margin-left:8px;">#breaking-through [계약공지]</span></h4>
+              <div class="when">2025-10-15 · Time-to-Close 161일</div>
+              <div class="detail">
+                <div class="detail-line"><b>제품</b>DWorks CS Talk (구축형 + 다국어 채팅상담)</div>
+                <div class="detail-line"><b>오픈일</b>2025-09-23</div>
+                <div class="detail-line"><b>직접 계약사</b>하나은행 (최종 고객사 동일)</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="annotations">
+    <h3>주요 인터랙션</h3>
+    <div class="annotation-item"><div class="num">1</div><div>좌측 리드 목록은 기본적으로 최신 인입 역순. 필터(등급/산업/위닝여부)로 필터링 가능. 리드 클릭 시 우측 타임라인 갱신.</div></div>
+    <div class="annotation-item"><div class="num">2</div><div>L2가 비어있는 리드(쓰레드 대응이 없는 리드)는 L2 뱃지가 회색으로 표시되고 "대응 기록 없음"으로 나타남. 같은 방식으로 L3·L4가 비어있으면 해당 단계가 회색.</div></div>
+    <div class="annotation-item"><div class="num">3</div><div>L3의 영업 활동이 여러 건인 경우 날짜순으로 모두 표시. 각 활동의 Action Item은 확장 가능.</div></div>
+    <div class="annotation-item"><div class="num">4</div><div>마더사 경유 계약의 경우 L4 카드에 "직접 계약사: LGCNS / 최종 고객사: HMM"처럼 두 줄로 분리 표시.</div></div>
+  </div>
+
+</div>
+
+<!-- ==================== Screen 3: 크로스 분석 히트맵 ==================== -->
+<div class="screen" id="s3">
+
+  <div class="screen-header">
+    <div>
+      <h2>화면 3 · 크로스 분석 히트맵</h2>
+      <div class="desc">어떤 산업·채널이 깊이 가는가를 한눈에. 콘텐츠·채널 전략 재조정의 근거.</div>
+    </div>
+    <div class="period-filter">
+      <button>이번 달</button>
+      <button>저번 달</button>
+      <button class="active">분기</button>
+      <button>반기</button>
+      <button>연간</button>
+    </div>
+  </div>
+
+  <div class="metabase-frame">
+    <div class="mb-topbar">
+      <div>
+        <div class="title">산업·채널 교차 분석</div>
+        <div class="sub">2026-01-01 ~ 2026-03-31 · QL 리드 기준 · 셀 숫자는 건수, 색 강도는 건수 비례</div>
+      </div>
+    </div>
+    <div class="mb-content">
+
+      <div class="grid-2col">
+
+        <!-- 산업군 × 대응 깊이 -->
+        <div class="card">
+          <div class="card-title">산업 Tier × 대응 깊이<span class="ann-dot">1</span></div>
+          <div class="card-sub">건수 기준. 어느 산업이 어느 단계까지 가는가.</div>
+          <div class="heatmap" style="margin-top: 16px;">
+            <div class="hm-header" style="grid-template-columns: 100px repeat(4, 1fr);">
+              <div></div>
+              <div>① 응답</div>
+              <div>② 소개서</div>
+              <div>③ 미팅</div>
+              <div>④ 계약</div>
+            </div>
+            <div class="hm-row" style="grid-template-columns: 100px repeat(4, 1fr);">
+              <div class="hm-label">Tier 1 (금융·공공·유통·제조)</div>
+              <div class="hm-cell hm-l3">18</div>
+              <div class="hm-cell hm-l3">15</div>
+              <div class="hm-cell hm-l2">7</div>
+              <div class="hm-cell hm-l2">2</div>
+            </div>
+            <div class="hm-row" style="grid-template-columns: 100px repeat(4, 1fr);">
+              <div class="hm-label">Tier 2 (IT·의료·교육·미디어)</div>
+              <div class="hm-cell hm-l2">14</div>
+              <div class="hm-cell hm-l2">10</div>
+              <div class="hm-cell hm-l1">4</div>
+              <div class="hm-cell hm-l1">1</div>
+            </div>
+            <div class="hm-row" style="grid-template-columns: 100px repeat(4, 1fr);">
+              <div class="hm-label">unknown (분류 미확정)</div>
+              <div class="hm-cell hm-l1">9</div>
+              <div class="hm-cell hm-l1">6</div>
+              <div class="hm-cell hm-l1">1</div>
+              <div class="hm-cell hm-l0">0</div>
+            </div>
+          </div>
+          <div class="legend">
+            <div class="item"><div class="sw" style="background:#FAF7F3;"></div>0건</div>
+            <div class="item"><div class="sw" style="background:#FEF5F7;"></div>1–5</div>
+            <div class="item"><div class="sw" style="background:#FCD8E0;"></div>6–10</div>
+            <div class="item"><div class="sw" style="background:#F8A5B5;"></div>11–15</div>
+            <div class="item"><div class="sw" style="background:#E94B6A;"></div>16+</div>
+          </div>
+          <div style="margin-top: 14px; padding: 10px 12px; background: #FDFBF9; border-radius: 6px; font-size: 11px; color: #6B7280; line-height: 1.5;">
+            <b style="color:#B81D3A;">해석 팁.</b> Tier 1이 미팅·계약 단계까지 잘 간다면 Tier 1 중심 콘텐츠 유지. Tier 2가 초기에서 멈춘다면 Tier 2 니즈 맞춤 콘텐츠 보강.
+          </div>
+        </div>
+
+        <!-- 채널 × 대응 깊이 -->
+        <div class="card">
+          <div class="card-title">인입 채널 × 대응 깊이<span class="ann-dot">2</span></div>
+          <div class="card-sub">어느 채널이 깊이 가는 리드를 공급하는가. 기존 LeadFlow 채널 분류 재사용.</div>
+          <div class="heatmap" style="margin-top: 16px;">
+            <div class="hm-header" style="grid-template-columns: 100px repeat(4, 1fr);">
+              <div></div>
+              <div>① 응답</div>
+              <div>② 소개서</div>
+              <div>③ 미팅</div>
+              <div>④ 계약</div>
+            </div>
+            <div class="hm-row" style="grid-template-columns: 100px repeat(4, 1fr);">
+              <div class="hm-label">홈페이지</div>
+              <div class="hm-cell hm-l3">14</div>
+              <div class="hm-cell hm-l3">11</div>
+              <div class="hm-cell hm-l2">5</div>
+              <div class="hm-cell hm-l2">2</div>
+            </div>
+            <div class="hm-row" style="grid-template-columns: 100px repeat(4, 1fr);">
+              <div class="hm-label">전화</div>
+              <div class="hm-cell hm-l2">7</div>
+              <div class="hm-cell hm-l1">5</div>
+              <div class="hm-cell hm-l1">2</div>
+              <div class="hm-cell hm-l1">1</div>
+            </div>
+            <div class="hm-row" style="grid-template-columns: 100px repeat(4, 1fr);">
+              <div class="hm-label">NOA</div>
+              <div class="hm-cell hm-l2">8</div>
+              <div class="hm-cell hm-l1">6</div>
+              <div class="hm-cell hm-l1">2</div>
+              <div class="hm-cell hm-l0">0</div>
+            </div>
+            <div class="hm-row" style="grid-template-columns: 100px repeat(4, 1fr);">
+              <div class="hm-label">블로그</div>
+              <div class="hm-cell hm-l1">6</div>
+              <div class="hm-cell hm-l1">5</div>
+              <div class="hm-cell hm-l1">2</div>
+              <div class="hm-cell hm-l0">0</div>
+            </div>
+            <div class="hm-row" style="grid-template-columns: 100px repeat(4, 1fr);">
+              <div class="hm-label">이메일</div>
+              <div class="hm-cell hm-l1">4</div>
+              <div class="hm-cell hm-l1">3</div>
+              <div class="hm-cell hm-l1">1</div>
+              <div class="hm-cell hm-l0">0</div>
+            </div>
+            <div class="hm-row" style="grid-template-columns: 100px repeat(4, 1fr);">
+              <div class="hm-label">Sales 직접</div>
+              <div class="hm-cell hm-l1">2</div>
+              <div class="hm-cell hm-l1">1</div>
+              <div class="hm-cell hm-l0">0</div>
+              <div class="hm-cell hm-l0">0</div>
+            </div>
+          </div>
+          <div style="margin-top: 14px; padding: 10px 12px; background: #FDFBF9; border-radius: 6px; font-size: 11px; color: #6B7280; line-height: 1.5;">
+            <b style="color:#B81D3A;">해석 팁.</b> 홈페이지·전화가 계약까지 이어지는 주 채널. NOA·블로그는 인입은 있지만 미팅 이하에서 멈춘다면 CTA·후속 안내 재검토.
+          </div>
+        </div>
+      </div>
+
+      <!-- 문의 유형 × 대응 깊이 -->
+      <div class="card" style="margin-top:16px;">
+        <div class="card-title">문의 유형 × 대응 깊이<span class="ann-dot">3</span></div>
+        <div class="card-sub">기존 리드 현황 대시보드의 문의 유형 분류(상담·영업·NOA(AI)·기술 연동·기타)를 재사용하여 대응 깊이 교차</div>
+        <div class="heatmap" style="margin-top: 16px;">
+          <div class="hm-header" style="grid-template-columns: 140px repeat(4, 1fr) 80px;">
+            <div></div>
+            <div>① 응답</div>
+            <div>② 소개서</div>
+            <div>③ 미팅</div>
+            <div>④ 계약</div>
+            <div>계약률</div>
+          </div>
+          <div class="hm-row" style="grid-template-columns: 140px repeat(4, 1fr) 80px;">
+            <div class="hm-label">상담</div>
+            <div class="hm-cell hm-l3">15</div>
+            <div class="hm-cell hm-l2">12</div>
+            <div class="hm-cell hm-l2">5</div>
+            <div class="hm-cell hm-l1">2</div>
+            <div style="text-align:center; font-weight:700; color:#B81D3A; padding:14px;">13.3%</div>
+          </div>
+          <div class="hm-row" style="grid-template-columns: 140px repeat(4, 1fr) 80px;">
+            <div class="hm-label">영업</div>
+            <div class="hm-cell hm-l2">10</div>
+            <div class="hm-cell hm-l2">8</div>
+            <div class="hm-cell hm-l1">4</div>
+            <div class="hm-cell hm-l1">1</div>
+            <div style="text-align:center; font-weight:700; color:#B81D3A; padding:14px;">10.0%</div>
+          </div>
+          <div class="hm-row" style="grid-template-columns: 140px repeat(4, 1fr) 80px;">
+            <div class="hm-label">NOA(AI)</div>
+            <div class="hm-cell hm-l2">7</div>
+            <div class="hm-cell hm-l1">5</div>
+            <div class="hm-cell hm-l1">1</div>
+            <div class="hm-cell hm-l0">0</div>
+            <div style="text-align:center; font-weight:700; color:#6B7280; padding:14px;">0.0%</div>
+          </div>
+          <div class="hm-row" style="grid-template-columns: 140px repeat(4, 1fr) 80px;">
+            <div class="hm-label">기술 연동</div>
+            <div class="hm-cell hm-l1">6</div>
+            <div class="hm-cell hm-l1">5</div>
+            <div class="hm-cell hm-l1">2</div>
+            <div class="hm-cell hm-l0">0</div>
+            <div style="text-align:center; font-weight:700; color:#6B7280; padding:14px;">0.0%</div>
+          </div>
+          <div class="hm-row" style="grid-template-columns: 140px repeat(4, 1fr) 80px;">
+            <div class="hm-label">기타</div>
+            <div class="hm-cell hm-l1">3</div>
+            <div class="hm-cell hm-l1">1</div>
+            <div class="hm-cell hm-l0">0</div>
+            <div class="hm-cell hm-l0">0</div>
+            <div style="text-align:center; font-weight:700; color:#6B7280; padding:14px;">0.0%</div>
+          </div>
+        </div>
+        <div style="margin-top: 14px; padding: 10px 12px; background: #FDFBF9; border-radius: 6px; font-size: 11px; color: #6B7280; line-height: 1.5;">
+          <b style="color:#B81D3A;">해석 팁.</b> 상담·영업 유형에서 주로 계약 발생. NOA(AI)·기술 연동은 초기 단계는 나오지만 계약까지 못 가는 구조 — 도입 의사결정 과정에서 추가 설득 자산이 필요.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="annotations">
+    <h3>주요 인터랙션</h3>
+    <div class="annotation-item"><div class="num">1</div><div>산업 Tier 분류는 LeadFlow 리드 판단 자동화에서 이미 부여한 값을 그대로 사용. 신규 로직 없음.</div></div>
+    <div class="annotation-item"><div class="num">2</div><div>셀 클릭 시 해당 조건의 리드 목록 팝업. 팝업 내 리드 클릭 시 화면 2(타임라인)로 이동.</div></div>
+    <div class="annotation-item"><div class="num">3</div><div>문의 유형은 기존 리드 현황 대시보드에서 이미 분류되어 있는 '상담 · 영업 · NOA(AI) · 기술 연동 · 기타' 값을 그대로 재사용. 신규 분류 로직 없음. 계약률 = 위닝 건수 ÷ 쓰레드 응답 건수.</div></div>
+  </div>
+
+</div>
+
+<!-- ==================== Screen 4: 위닝 케이스 프로파일 ==================== -->
+<div class="screen" id="s4">
+
+  <div class="screen-header">
+    <div>
+      <h2>화면 4 · 위닝 케이스 프로파일</h2>
+      <div class="desc">계약에 이른 리드의 공통 특성을 귀납적으로 도출. 마케팅 기여율의 최소 수준과 패턴.</div>
+    </div>
+    <div class="period-filter">
+      <button>이번 달</button>
+      <button>저번 달</button>
+      <button>분기</button>
+      <button>반기</button>
+      <button class="active">연간</button>
+    </div>
+  </div>
+
+  <div class="metabase-frame">
+    <div class="mb-topbar">
+      <div>
+        <div class="title">위닝 케이스 — 마케팅 리드 기인 계약</div>
+        <div class="sub">기간 내 #breaking-through 계약 공지 중 #리드등록알림 기인이 확인된 건</div>
+      </div>
+    </div>
+    <div class="mb-content">
+
+      <!-- KPI -->
+      <div class="kpi-row" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="kpi-card">
+          <div class="label">기간 내 전체 계약<span class="ann-dot">1</span></div>
+          <div class="value">17</div>
+          <div class="delta">#breaking-through 기준</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">마케팅 리드 기인 위닝</div>
+          <div class="value accent">3</div>
+          <div class="delta up">기여율 17.6%</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Time-to-Close 중앙값</div>
+          <div class="value">45</div>
+          <div class="delta">일 · 범위 28~161일</div>
+        </div>
+      </div>
+
+      <div class="winning-wrap">
+
+        <!-- 위닝 케이스 목록 -->
+        <div class="card winning-list-card">
+          <div class="card-title">위닝 케이스 목록<span class="ann-dot">2</span></div>
+          <div class="card-sub">계약일 역순. 클릭 시 화면 2로 이동.</div>
+          <div class="list" style="margin-top: 12px;">
+            <div class="winning-item">
+              <div class="top">
+                <div class="company">하나은행</div>
+                <div class="date">2025-10-15</div>
+              </div>
+              <div class="bottom">
+                <span class="chip">1등급</span>
+                <span>금융 · 홈페이지 · DWorks CS Talk · 161일</span>
+              </div>
+            </div>
+            <div class="winning-item">
+              <div class="top">
+                <div class="company">(주)리드넘버</div>
+                <div class="date">2025-09-12</div>
+              </div>
+              <div class="bottom">
+                <span class="chip">2등급</span>
+                <span>IT · 전화 · DWorks Salesbridge · 68일</span>
+              </div>
+            </div>
+            <div class="winning-item">
+              <div class="top">
+                <div class="company">삼성카드</div>
+                <div class="date">2025-09-19</div>
+              </div>
+              <div class="bottom">
+                <span class="chip">1등급</span>
+                <span>금융 · 홈페이지 · eNomix 고도화 · 45일</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 공통 특성 프로파일 -->
+        <div class="card">
+          <div class="card-title">공통 특성 프로파일<span class="ann-dot">3</span></div>
+          <div class="card-sub">위닝 케이스 3건의 특성 분포</div>
+
+          <div class="profile-charts" style="margin-top: 16px;">
+
+            <div>
+              <div class="mini-chart-title">등급 분포</div>
+              <div class="mini-bar"><div class="label">1등급</div><div class="track"><div class="fill" style="width:67%;"></div></div><div class="count">2</div></div>
+              <div class="mini-bar"><div class="label">2등급</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
+              <div class="mini-bar"><div class="label">3등급</div><div class="track"><div class="fill" style="width:0%;"></div></div><div class="count">0</div></div>
+            </div>
+
+            <div>
+              <div class="mini-chart-title">산업 Tier</div>
+              <div class="mini-bar"><div class="label">Tier 1 금융</div><div class="track"><div class="fill" style="width:67%;"></div></div><div class="count">2</div></div>
+              <div class="mini-bar"><div class="label">Tier 2 IT</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
+            </div>
+
+            <div>
+              <div class="mini-chart-title">인입 채널</div>
+              <div class="mini-bar"><div class="label">홈페이지</div><div class="track"><div class="fill" style="width:67%;"></div></div><div class="count">2</div></div>
+              <div class="mini-bar"><div class="label">전화</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
+            </div>
+
+            <div>
+              <div class="mini-chart-title">제품</div>
+              <div class="mini-bar"><div class="label">DWorks CS Talk</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
+              <div class="mini-bar"><div class="label">DWorks Salesbridge</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
+              <div class="mini-bar"><div class="label">eNomix 고도화</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
+            </div>
+
+            <div>
+              <div class="mini-chart-title">문의 유형</div>
+              <div class="mini-bar"><div class="label">상담</div><div class="track"><div class="fill" style="width:67%;"></div></div><div class="count">2</div></div>
+              <div class="mini-bar"><div class="label">영업</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
+              <div class="mini-bar"><div class="label">NOA(AI)</div><div class="track"><div class="fill" style="width:0%;"></div></div><div class="count">0</div></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 추세 -->
+      <div class="card" style="margin-top: 16px;">
+        <div class="card-title">기여율 추세<span class="ann-dot">4</span></div>
+        <div class="card-sub">월별 마케팅 리드 기인 위닝 비율. 숫자가 낮아도 우상향이면 마케팅 기여 증명.</div>
+        <svg viewBox="0 0 800 180" style="width:100%; height:180px; margin-top: 16px;">
+          <line x1="40" y1="150" x2="780" y2="150" stroke="#E5DACF" stroke-width="1"/>
+          <line x1="40" y1="20" x2="40" y2="150" stroke="#E5DACF" stroke-width="1"/>
+          <text x="10" y="25" font-size="10" fill="#6B7280">25%</text>
+          <text x="10" y="90" font-size="10" fill="#6B7280">10%</text>
+          <text x="10" y="155" font-size="10" fill="#6B7280">0%</text>
+          <polyline points="80,145 160,148 240,140 320,130 400,120 480,100 560,95 640,85 720,70" stroke="#E94B6A" stroke-width="2" fill="none"/>
+          <circle cx="80" cy="145" r="4" fill="#E94B6A"/>
+          <circle cx="160" cy="148" r="4" fill="#E94B6A"/>
+          <circle cx="240" cy="140" r="4" fill="#E94B6A"/>
+          <circle cx="320" cy="130" r="4" fill="#E94B6A"/>
+          <circle cx="400" cy="120" r="4" fill="#E94B6A"/>
+          <circle cx="480" cy="100" r="4" fill="#E94B6A"/>
+          <circle cx="560" cy="95" r="4" fill="#E94B6A"/>
+          <circle cx="640" cy="85" r="4" fill="#E94B6A"/>
+          <circle cx="720" cy="70" r="4" fill="#E94B6A"/>
+          <text x="80" y="170" font-size="10" fill="#6B7280" text-anchor="middle">7월</text>
+          <text x="160" y="170" font-size="10" fill="#6B7280" text-anchor="middle">8월</text>
+          <text x="240" y="170" font-size="10" fill="#6B7280" text-anchor="middle">9월</text>
+          <text x="320" y="170" font-size="10" fill="#6B7280" text-anchor="middle">10월</text>
+          <text x="400" y="170" font-size="10" fill="#6B7280" text-anchor="middle">11월</text>
+          <text x="480" y="170" font-size="10" fill="#6B7280" text-anchor="middle">12월</text>
+          <text x="560" y="170" font-size="10" fill="#6B7280" text-anchor="middle">1월</text>
+          <text x="640" y="170" font-size="10" fill="#6B7280" text-anchor="middle">2월</text>
+          <text x="720" y="170" font-size="10" fill="#6B7280" text-anchor="middle">3월</text>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="annotations">
+    <h3>주요 인터랙션</h3>
+    <div class="annotation-item"><div class="num">1</div><div>전체 계약 카드 클릭 시 #breaking-through 전체 목록 표시 (마케팅 기인 외 SI 경유 등 전수). 기여율 맥락 이해용.</div></div>
+    <div class="annotation-item"><div class="num">2</div><div>위닝 케이스 목록 아이템 클릭 시 화면 2(여정 타임라인)으로 이동하여 해당 리드의 전체 여정 확인.</div></div>
+    <div class="annotation-item"><div class="num">3</div><div>프로파일은 위닝 건수가 적을수록 신뢰도가 낮음. 최소 표본 경고(예: "N=3, 표본이 작아 패턴 해석 주의")를 카드 하단에 자동 표시.</div></div>
+    <div class="annotation-item"><div class="num">4</div><div>추세 선은 월별 집계. 숫자가 낮아도 우상향이면 마케팅 파이프라인의 기여 증가 증명. 기준선(0%)을 강조.</div></div>
+  </div>
+
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const screen = tab.dataset.screen;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(screen).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+</script>
+
+</body>
+</html>
