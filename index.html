@@ -503,9 +503,11 @@ body {
   margin-bottom: 6px;
 }
 .tl-card .when {
-  font-size: 11px;
-  color: #6B7280;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1F1F1F;
   margin-bottom: 10px;
+  letter-spacing: -0.3px;
 }
 .tl-card .detail {
   font-size: 12px;
@@ -522,7 +524,131 @@ body {
   font-size: 12px;
 }
 
-/* ---------- 위닝 케이스 (Screen 4) ---------- */
+/* 단계 간 경과 시간 표시 */
+.tl-gap {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 16px;
+  align-items: center;
+  position: relative;
+}
+.tl-gap .gap-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tl-gap .gap-line::before {
+  content: "";
+  position: absolute;
+  left: 17px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #F5EDE7;
+  z-index: 0;
+}
+.tl-gap .gap-badge {
+  background: white;
+  border: 1.5px solid #E94B6A;
+  color: #E94B6A;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
+}
+.tl-gap.long { padding: 20px 0; }
+.tl-gap.medium { padding: 12px 0; }
+.tl-gap.short { padding: 6px 0; }
+.tl-gap.long .gap-badge {
+  background: #FEEDF1;
+  border-color: #B81D3A;
+  color: #B81D3A;
+}
+
+/* 슬랙 원문 버튼 */
+.slack-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+  font-size: 11px;
+  color: #6B7280;
+  cursor: pointer;
+  border: 1px solid #E5E7EB;
+  background: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+.slack-link-btn:hover { border-color: #E94B6A; color: #E94B6A; }
+
+/* 슬랙 원문 팝업 모달 */
+.slack-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+.slack-modal-overlay.open { display: flex; }
+.slack-modal {
+  background: white;
+  border-radius: 12px;
+  width: 560px;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+.slack-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #F0E8E2;
+}
+.slack-modal-header .channel {
+  font-size: 12px;
+  color: #6B7280;
+  font-weight: 600;
+}
+.slack-modal-header .close-btn {
+  cursor: pointer;
+  font-size: 18px;
+  color: #9CA3AF;
+  background: none;
+  border: none;
+  line-height: 1;
+}
+.slack-modal-body {
+  padding: 20px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #1F1F1F;
+}
+.slack-msg-meta {
+  font-size: 11px;
+  color: #9CA3AF;
+  margin-bottom: 12px;
+}
+.slack-msg-content {
+  background: #F9FAFB;
+  border-left: 3px solid #E94B6A;
+  padding: 12px 14px;
+  border-radius: 0 6px 6px 0;
+  white-space: pre-wrap;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.tl-card { cursor: pointer; transition: box-shadow 0.15s; }
+.tl-card:hover { box-shadow: 0 2px 12px rgba(233,75,106,0.12); border-color: #F8A5B5; }
+
+/* ---------- 계약 완료 케이스 (Screen 4) ---------- */
 .winning-wrap {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -653,7 +779,7 @@ body {
   <div class="tab active" data-screen="s1">화면 1 · 파이프라인 퍼널</div>
   <div class="tab" data-screen="s2">화면 2 · 리드 여정 타임라인</div>
   <div class="tab" data-screen="s3">화면 3 · 크로스 분석 히트맵</div>
-  <div class="tab" data-screen="s4">화면 4 · 위닝 케이스 프로파일</div>
+  <div class="tab" data-screen="s4">화면 4 · 계약 완료 케이스 프로파일</div>
 </div>
 
 <!-- ==================== Screen 1: 파이프라인 퍼널 ==================== -->
@@ -666,16 +792,16 @@ body {
     </div>
     <div class="period-filter">
       <button>이번 달</button>
-      <button class="active">저번 달</button>
+      <button>저번 달</button>
       <button>분기</button>
       <button>반기</button>
-      <button>연간</button>
+      <button class="active">연간</button>
     </div>
   </div>
 
   <div class="link-banner">
     <span>◉ 이 리드들이 얼마나 유입됐는지 먼저 보려면 →</span>
-    <a>리드 현황 대시보드로 이동</a>
+    <a href="https://www.culture.io.kr/dashboard" target="_blank">리드 현황 대시보드로 이동 →</a>
   </div>
 
   <div class="metabase-frame">
@@ -694,23 +820,23 @@ body {
       <div class="kpi-row">
         <div class="kpi-card">
           <div class="label">총 QL 리드<span class="ann-dot">1</span></div>
-          <div class="value">41</div>
-          <div class="delta up">↑ 5건 전월 대비</div>
+          <div class="value">89</div>
+          <div class="delta up">전체 196건 중 QL 45.4%</div>
         </div>
         <div class="kpi-card">
           <div class="label">미팅 진행</div>
-          <div class="value">12</div>
-          <div class="delta">29.3% 도달</div>
+          <div class="value">—</div>
+          <div class="delta" style="color:#9CA3AF;">Phase 9+ 이후 자동화</div>
         </div>
         <div class="kpi-card">
-          <div class="label">위닝 건수<span class="ann-dot">2</span></div>
-          <div class="value accent">3</div>
-          <div class="delta down">↓ 1건 전월 대비</div>
+          <div class="label">계약 완료 건수<span class="ann-dot">2</span></div>
+          <div class="value accent">2</div>
+          <div class="delta">마케팅 기인 확인</div>
         </div>
         <div class="kpi-card">
-          <div class="label">Time-to-Close 중앙값</div>
-          <div class="value">45</div>
-          <div class="delta">일 (위닝 기준)</div>
+          <div class="label">Time-to-Close 평균</div>
+          <div class="value">—</div>
+          <div class="delta" style="color:#9CA3AF;">Phase 9+ 이후 자동화</div>
         </div>
       </div>
 
@@ -847,7 +973,7 @@ body {
   <div class="annotations">
     <h3>주요 인터랙션 (개발 시 고려)</h3>
     <div class="annotation-item"><div class="num">1</div><div>KPI 카드 클릭 시 해당 단계에 있는 리드 목록으로 필터링 (화면 1의 우측 하단 테이블로 스크롤 + 하이라이트).</div></div>
-    <div class="annotation-item"><div class="num">2</div><div>위닝 건수 카드 클릭 시 화면 4(위닝 케이스 프로파일)로 이동.</div></div>
+    <div class="annotation-item"><div class="num">2</div><div>위닝 건수 카드 클릭 시 화면 4(계약 완료 케이스 프로파일)로 이동.</div></div>
     <div class="annotation-item"><div class="num">3</div><div>퍼널 각 단계 바 클릭 시 해당 단계 리드 목록으로 드릴다운. 개별 리드 클릭은 화면 2(여정 타임라인)로 이동.</div></div>
     <div class="annotation-item"><div class="num">4</div><div>등급별 막대는 1/2/3등급 각각의 미팅 단계 도달률. 카드 클릭 시 해당 등급만 필터링된 퍼널로 전환.</div></div>
     <div class="annotation-item"><div class="num">5</div><div>Handoff Lag 히스토그램. 24시간 초과 구간이 핵심 관리 지표. 해당 막대 클릭 시 초과 리드 목록 팝업.</div></div>
@@ -883,99 +1009,301 @@ body {
         <!-- 리드 목록 (좌측) -->
         <div class="lead-sidebar">
           <h4>QL 리드 목록 <span class="ann-dot">1</span></h4>
-          <div class="lead-item">
-            <div class="company">(주)리드넘버</div>
+          <div style="font-size:10px; color:#9CA3AF; margin-bottom:8px; padding: 0 2px;">클릭하면 우측에 여정이 표시됩니다</div>
+
+          <!-- 케이스 ① L1~L4 계약완료 -->
+          <div class="lead-item selected" data-case="c1" onclick="showCase('c1', this)">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div class="company">하나은행</div>
+              <span style="font-size:9px; background:#B81D3A; color:white; padding:1px 6px; border-radius:3px; font-weight:700;">계약완료</span>
+            </div>
+            <div class="meta">2025-05-07 · 홈페이지 · 1등급</div>
+            <div style="margin-top:4px; display:flex; gap:4px;">
+              <span style="font-size:9px; background:#FCD8E0; color:#B81D3A; padding:1px 5px; border-radius:2px;">응답</span>
+              <span style="font-size:9px; background:#FCD8E0; color:#B81D3A; padding:1px 5px; border-radius:2px;">소개서</span>
+              <span style="font-size:9px; background:#FCD8E0; color:#B81D3A; padding:1px 5px; border-radius:2px;">미팅</span>
+              <span style="font-size:9px; background:#B81D3A; color:white; padding:1px 5px; border-radius:2px;">계약</span>
+            </div>
+          </div>
+
+          <!-- 케이스 ② L1~L2 비용안내까지 -->
+          <div class="lead-item" data-case="c2" onclick="showCase('c2', this)">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div class="company">(주)리드넘버</div>
+              <span style="font-size:9px; background:#7C3AED; color:white; padding:1px 6px; border-radius:3px; font-weight:700;">비용안내</span>
+            </div>
             <div class="meta">2025-07-07 · 전화 · 2등급</div>
+            <div style="margin-top:4px; display:flex; gap:4px;">
+              <span style="font-size:9px; background:#FCD8E0; color:#B81D3A; padding:1px 5px; border-radius:2px;">응답</span>
+              <span style="font-size:9px; background:#FCD8E0; color:#B81D3A; padding:1px 5px; border-radius:2px;">비용안내</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">미팅</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">계약</span>
+            </div>
           </div>
-          <div class="lead-item selected">
-            <div class="company">하나은행</div>
-            <div class="meta">2025-05-07 · 홈페이지 · 1등급 · <span style="color:#B81D3A; font-weight:700;">위닝</span></div>
+
+          <!-- 케이스 ③ L1~L2 응답만 (플랜아이) -->
+          <div class="lead-item" data-case="c3" onclick="showCase('c3', this)">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div class="company">플랜아이</div>
+              <span style="font-size:9px; background:#6B7280; color:white; padding:1px 6px; border-radius:3px; font-weight:700;">응답만</span>
+            </div>
+            <div class="meta">2026-04-13 · 전화 · 1등급</div>
+            <div style="margin-top:4px; display:flex; gap:4px;">
+              <span style="font-size:9px; background:#FCD8E0; color:#B81D3A; padding:1px 5px; border-radius:2px;">응답</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">소개서</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">미팅</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">계약</span>
+            </div>
           </div>
-          <div class="lead-item">
-            <div class="company">오토메타</div>
-            <div class="meta">2026-04-14 · NOA · 2등급</div>
+
+          <!-- 케이스 ④ 비QL + 비용안내 (더게임) -->
+          <div class="lead-item" data-case="c4" onclick="showCase('c4', this)">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div class="company">더게임</div>
+              <span style="font-size:9px; background:#D97706; color:white; padding:1px 6px; border-radius:3px; font-weight:700;">비QL</span>
+            </div>
+            <div class="meta">2026-04-16 · 전화 · 5등급</div>
+            <div style="margin-top:4px; display:flex; gap:4px;">
+              <span style="font-size:9px; background:#FCD8E0; color:#B81D3A; padding:1px 5px; border-radius:2px;">응답</span>
+              <span style="font-size:9px; background:#FEF3C7; color:#D97706; padding:1px 5px; border-radius:2px;">비용안내</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">미팅</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">계약</span>
+            </div>
           </div>
-          <div class="lead-item">
-            <div class="company">플랜아이</div>
-            <div class="meta">2026-04-13 · 전화 · 3등급</div>
-          </div>
-          <div class="lead-item">
-            <div class="company">이노뱃</div>
-            <div class="meta">2026-04-09 · 전화 · 3등급</div>
-          </div>
-          <div class="lead-item">
-            <div class="company">더게임</div>
-            <div class="meta">2026-04-16 · 전화 · 3등급</div>
+
+          <div style="margin-top: 12px; border-top: 1px solid #F5EDE7; padding-top: 10px; font-size:10px; color:#9CA3AF;">
+            + 오토메타, 이노뱃, TEMU 외 25건
           </div>
         </div>
 
         <!-- 타임라인 (우측) -->
-        <div class="timeline">
+        <div class="timeline" id="timelinePanel">
+
+          <!-- ===== 케이스 C1: 계약완료 (하나은행) ===== -->
+          <div id="case-c1">
           <div class="timeline-header">
             <h3>하나은행 · 다국어 채팅상담 서비스 도입</h3>
             <div class="info">
-              <span>사업자번호 209-81-00001</span>
-              <span class="tag">1등급 (최우선 QL)</span>
-              <span>산업 FIT Tier 1 (금융)</span>
+              <span>1등급 (최우선 QL)</span>
+              <span class="tag">계약 완료</span>
               <span>총 여정 161일</span>
             </div>
           </div>
-
-          <!-- L1: 리드 인입 -->
           <div class="tl-layer">
             <div class="badge">L1</div>
-            <div class="tl-card">
+            <div class="tl-card" onclick="openSlackModal('l1')">
               <h4>리드 인입 <span style="color:#6B7280; font-weight:400; font-size:11px; margin-left:8px;">#리드등록알림 봇 메시지</span></h4>
               <div class="when">2025-05-07 09:12 · 인입 채널: 홈페이지</div>
               <div class="detail">
                 <div class="detail-line"><b>기업명</b>하나은행</div>
-                <div class="detail-line"><b>담당자</b>김**</div>
                 <div class="detail-line"><b>문의내용</b>다국어 채팅상담 서비스 도입 검토 중. 영상예약상담까지 포함 가능한지 문의드립니다.</div>
-                <div class="detail-line"><b>긴급도</b>보통</div>
               </div>
+              <button class="slack-link-btn">💬 슬랙 원문 보기</button>
             </div>
           </div>
-
-          <!-- L2: 1차 대응 -->
+          <div class="tl-gap short"><div class="gap-line"></div><div><span class="gap-badge">↓ 5시간 21분 후</span></div></div>
           <div class="tl-layer">
             <div class="badge">L2</div>
-            <div class="tl-card">
+            <div class="tl-card" onclick="openSlackModal('l2')">
               <h4>1차 대응 <span style="color:#6B7280; font-weight:400; font-size:11px; margin-left:8px;">#리드등록알림 쓰레드</span></h4>
               <div class="when">2025-05-07 14:33 · 대응 lag 5시간 21분</div>
               <div class="detail">
                 <div class="detail-line"><b>담당자</b>상현 (멘션: @도헌 @지석)</div>
                 <div class="detail-line"><b>액션 유형</b><span style="background:#FEEDF1; color:#B81D3A; padding:2px 8px; border-radius:3px; font-weight:600; font-size:11px;">제품 소개 + 비용 안내 + 미팅 제안</span></div>
-                <div class="detail-line"><b>기록 요약</b>담당자 컨택 후 대면미팅 제안. 일정 조율 중.</div>
               </div>
+              <button class="slack-link-btn">💬 슬랙 원문 보기</button>
             </div>
           </div>
-
-          <!-- L3: 영업 활동 (여러 건) -->
+          <div class="tl-gap medium"><div class="gap-line"></div><div><span class="gap-badge">↓ 7일 후</span></div></div>
           <div class="tl-layer">
             <div class="badge">L3</div>
-            <div class="tl-card">
+            <div class="tl-card" onclick="openSlackModal('l3')">
               <h4>영업 활동 (3건) <span style="color:#6B7280; font-weight:400; font-size:11px; margin-left:8px;">#all-영업활동공유</span></h4>
-              <div class="when">2025-05-14 ~ 2025-07-15 · 지속 대응</div>
+              <div class="when">2025-05-14 ~ 2025-07-15</div>
               <div class="detail">
                 <div class="detail-line"><b>2025-05-14</b>대면미팅. 다국어 채팅상담 요건 확인 및 데모 시연</div>
                 <div class="detail-line"><b>2025-06-03</b>RFP 수령 및 가격 협의</div>
                 <div class="detail-line"><b>2025-07-15</b>최종 기술 협의 및 계약 조건 확정</div>
               </div>
+              <button class="slack-link-btn">💬 슬랙 원문 보기</button>
             </div>
           </div>
-
-          <!-- L4: 계약 -->
+          <div class="tl-gap long"><div class="gap-line"></div><div><span class="gap-badge">↓ 92일 후</span><div style="font-size:10px; color:#B81D3A; margin-top:4px;">⚠️ 고객사 내부 사업 승인 대기</div></div></div>
           <div class="tl-layer">
             <div class="badge">L4</div>
-            <div class="tl-card" style="border-color:#E94B6A; background:#FDF2F5;">
-              <h4 style="color:#B81D3A;">🎉 계약 체결 <span style="color:#6B7280; font-weight:400; font-size:11px; margin-left:8px;">#breaking-through [계약공지]</span></h4>
-              <div class="when">2025-10-15 · Time-to-Close 161일</div>
+            <div class="tl-card" style="border-color:#E94B6A; background:#FDF2F5;" onclick="openSlackModal('l4')">
+              <h4 style="color:#B81D3A;">🎉 계약 체결 <span style="color:#6B7280; font-weight:400; font-size:11px; margin-left:8px;">#breaking-through</span></h4>
+              <div class="when">2025-10-15 · Time-to-Close <b style="color:#B81D3A;">161일</b></div>
               <div class="detail">
                 <div class="detail-line"><b>제품</b>DWorks CS Talk (구축형 + 다국어 채팅상담)</div>
-                <div class="detail-line"><b>오픈일</b>2025-09-23</div>
-                <div class="detail-line"><b>직접 계약사</b>하나은행 (최종 고객사 동일)</div>
+                <div class="detail-line"><b>직접 계약사</b>하나은행</div>
               </div>
+              <button class="slack-link-btn">💬 슬랙 원문 보기</button>
             </div>
+          </div>
+          </div>
+
+          <!-- ===== 케이스 C2: 미팅까지 ((주)리드넘버) ===== -->
+          <div id="case-c2" style="display:none;">
+          <div class="timeline-header">
+            <h3>(주)리드넘버 · 카카오상담톡 도입 문의 (무료버전 계정제한)</h3>
+            <div class="info">
+              <span>2등급 (QL)</span>
+              <span class="tag" style="background:#EDE9FE; color:#7C3AED;">비용 안내 완료</span>
+              <span>현재까지 진행 중</span>
+            </div>
+          </div>
+          <div class="tl-layer">
+            <div class="badge">L1</div>
+            <div class="tl-card" onclick="openSlackModal('rn_l1')">
+              <h4>리드 인입 <span style="color:#6B7280; font-weight:400; font-size:11px; margin-left:8px;">#리드등록알림 수동 등록</span></h4>
+              <div class="when" style="font-size:14px; font-weight:700; color:#1F1F1F; margin-bottom:8px;">2025-07-07 14:01</div>
+              <div class="detail">
+                <div class="detail-line"><b>기업명</b>(주)리드넘버</div>
+                <div class="detail-line"><b>채널</b>대표전화</div>
+                <div class="detail-line"><b>담당자</b>홍명표 선생님 · 010-8862-4103</div>
+                <div class="detail-line"><b>문의내용</b>현재 무료버전 사용 중이나 계정제한에 걸렸음. 여러 연동 가능 문의드리고 싶음.</div>
+                <div class="detail-line"><b>등록자</b>김건우_HR (수동 등록)</div>
+              </div>
+              <button class="slack-link-btn">💬 슬랙 원문 보기</button>
+            </div>
+          </div>
+          <div class="tl-gap short"><div class="gap-line"></div><div><span class="gap-badge">↓ 당일 대응</span></div></div>
+          <div class="tl-layer">
+            <div class="badge">L2</div>
+            <div class="tl-card" onclick="openSlackModal('rn_l2')">
+              <h4>1차 대응 <span style="color:#6B7280; font-weight:400; font-size:11px; margin-left:8px;">#리드등록알림 쓰레드</span></h4>
+              <div class="when" style="font-size:14px; font-weight:700; color:#1F1F1F; margin-bottom:8px;">2025-07-07 · 김혜선</div>
+              <div class="detail">
+                <div class="detail-line"><b>액션 유형</b><span style="background:#FEEDF1; color:#B81D3A; padding:2px 8px; border-radius:3px; font-weight:600; font-size:11px;">비용 안내 (가견적 송부)</span></div>
+                <div class="detail-line"><b>기록 요약</b>카카오상담톡 API 문의 대응. 채널 1개 기준 API 운영비 가견적 송부. 내부 개발로 API 사용 문의였음.</div>
+              </div>
+              <button class="slack-link-btn">💬 슬랙 원문 보기</button>
+            </div>
+          </div>
+          <div class="tl-layer empty" style="padding-top:16px;">
+            <div class="badge" style="background:#E5DACF;">L3</div>
+            <div class="tl-card" style="background:#F9FAFB; border-color:#E5E7EB;">
+              <h4 style="color:#9CA3AF;">영업 활동</h4>
+              <div class="tl-empty">영업 활동 기록 없음 — 가견적 발송 후 추가 연락 없음</div>
+            </div>
+          </div>
+          <div class="tl-layer empty" style="padding-top:8px;">
+            <div class="badge" style="background:#E5DACF;">L4</div>
+            <div class="tl-card" style="background:#F9FAFB; border-color:#E5E7EB;">
+              <h4 style="color:#9CA3AF;">계약 체결</h4>
+              <div class="tl-empty">—</div>
+            </div>
+          </div>
+          </div>
+
+          <!-- ===== 케이스 C3: 응답만 (플랜아이) ===== -->
+          <div id="case-c3" style="display:none;">
+          <div class="timeline-header">
+            <h3>플랜아이 · 공공기관 AI Festival 카카오상담톡 대행사 협업 문의</h3>
+            <div class="info">
+              <span>1등급 (최우선 QL)</span>
+              <span class="tag" style="background:#F3F4F6; color:#6B7280;">응답 완료</span>
+              <span>현재까지 9일 경과</span>
+            </div>
+          </div>
+          <div class="tl-layer">
+            <div class="badge">L1</div>
+            <div class="tl-card" onclick="openSlackModal('planai_l1')">
+              <h4>리드 인입 <span style="color:#6B7280; font-weight:400; font-size:11px; margin-left:8px;">#리드등록알림 봇 메시지</span></h4>
+              <div class="when" style="font-size:13px; font-weight:700; color:#1F1F1F; margin-bottom:8px;">2026-04-13 13:36</div>
+              <div class="detail">
+                <div class="detail-line"><b>기업명</b>플랜아이 (사업자 305-81-72470)</div>
+                <div class="detail-line"><b>채널</b>대표전화</div>
+                <div class="detail-line"><b>담당자</b>이재만 수석 · 010-3003-5996</div>
+                <div class="detail-line"><b>문의내용</b>주로 공공기관을 고객으로 시스템운영 업무를 하고 있음. 곧 정통부 주최의 AI Festival에 참가할 예정인데 카카오상담톡 관련 대행사로 스펙트라와 협의해도 되는지?</div>
+                <div class="detail-line"><b>긴급도</b>높음 (1~2일 내 회신 필요)</div>
+              </div>
+              <button class="slack-link-btn">💬 슬랙 원문 보기</button>
+            </div>
+          </div>
+          <div class="tl-gap short"><div class="gap-line"></div><div><span class="gap-badge">↓ 당일 대응</span></div></div>
+          <div class="tl-layer">
+            <div class="badge">L2</div>
+            <div class="tl-card" onclick="openSlackModal('planai_l2')">
+              <h4>1차 대응 <span style="color:#6B7280; font-weight:400; font-size:11px; margin-left:8px;">#리드등록알림 쓰레드</span></h4>
+              <div class="when" style="font-size:13px; font-weight:700; color:#1F1F1F; margin-bottom:8px;">2026-04-13 · 이종석</div>
+              <div class="detail">
+                <div class="detail-line"><b>액션 유형</b><span style="background:#FEF3C7; color:#D97706; padding:2px 8px; border-radius:3px; font-weight:600; font-size:11px;">내부 검토 중</span></div>
+                <div class="detail-line"><b>기록 요약</b>"경쟁업체 아닌가 생각되는데.." — 추가 대응 보류 중</div>
+              </div>
+              <button class="slack-link-btn">💬 슬랙 원문 보기</button>
+            </div>
+          </div>
+          <div class="tl-layer empty" style="padding-top:16px;">
+            <div class="badge" style="background:#E5DACF;">L3</div>
+            <div class="tl-card" style="background:#F9FAFB; border-color:#E5E7EB;">
+              <h4 style="color:#9CA3AF;">영업 활동</h4>
+              <div class="tl-empty">영업 활동 기록 없음 — 내부 검토 보류 상태</div>
+            </div>
+          </div>
+          <div class="tl-layer empty" style="padding-top:8px;">
+            <div class="badge" style="background:#E5DACF;">L4</div>
+            <div class="tl-card" style="background:#F9FAFB; border-color:#E5E7EB;">
+              <h4 style="color:#9CA3AF;">계약 체결</h4>
+              <div class="tl-empty">—</div>
+            </div>
+          </div>
+          </div>
+
+          <!-- ===== 케이스 C4: 비용안내까지 / 비QL (더게임) ===== -->
+          <div id="case-c4" style="display:none;">
+          <div class="timeline-header">
+            <h3>더게임 · 카카오톡 상담톡 신규 도입 문의</h3>
+            <div class="info">
+              <span style="background:#F3F4F6; color:#6B7280; padding:2px 8px; border-radius:4px; font-weight:600;">5등급 (비QL)</span>
+              <span class="tag" style="background:#FEF3C7; color:#D97706;">비용 안내 완료</span>
+              <span>⚠️ 비QL인데 비용 안내까지 진행</span>
+            </div>
+          </div>
+          <div class="tl-layer">
+            <div class="badge">L1</div>
+            <div class="tl-card" onclick="openSlackModal('game_l1')">
+              <h4>리드 인입 <span style="color:#6B7280; font-weight:400; font-size:11px; margin-left:8px;">#리드등록알림 봇 메시지</span></h4>
+              <div class="when" style="font-size:13px; font-weight:700; color:#1F1F1F; margin-bottom:8px;">2026-04-16 10:12</div>
+              <div class="detail">
+                <div class="detail-line"><b>기업명</b>더게임</div>
+                <div class="detail-line"><b>채널</b>대표전화</div>
+                <div class="detail-line"><b>담당자</b>백정현 · 010-2690-8696</div>
+                <div class="detail-line"><b>문의내용</b>카카오톡 상담 신규 도입 문의</div>
+                <div class="detail-line"><b>긴급도</b>높음 (1~2일 내 회신 필요)</div>
+              </div>
+              <button class="slack-link-btn">💬 슬랙 원문 보기</button>
+            </div>
+          </div>
+          <div class="tl-gap short"><div class="gap-line"></div><div><span class="gap-badge">↓ 당일 대응</span></div></div>
+          <div class="tl-layer">
+            <div class="badge">L2</div>
+            <div class="tl-card" onclick="openSlackModal('game_l2')">
+              <h4>1차 대응 <span style="color:#6B7280; font-weight:400; font-size:11px; margin-left:8px;">#리드등록알림 쓰레드</span></h4>
+              <div class="when" style="font-size:13px; font-weight:700; color:#1F1F1F; margin-bottom:8px;">2026-04-16 · 제은비</div>
+              <div class="detail">
+                <div class="detail-line"><b>액션 유형</b><span style="background:#FEEDF1; color:#B81D3A; padding:2px 8px; border-radius:3px; font-weight:600; font-size:11px;">비용 안내</span></div>
+                <div class="detail-line"><b>기록 요약</b>업체에서 개발한 AI 학회서비스에 상담톡 연결 희망. 상담톡 API만 사용하는 것으로 문의하여 월 비용 안내. 타 업체도 비교중이라고 하며, 추후 연락주기로 하였음.</div>
+              </div>
+
+              <button class="slack-link-btn">💬 슬랙 원문 보기</button>
+            </div>
+          </div>
+          <div class="tl-layer empty" style="padding-top:16px;">
+            <div class="badge" style="background:#E5DACF;">L3</div>
+            <div class="tl-card" style="background:#F9FAFB; border-color:#E5E7EB;">
+              <h4 style="color:#9CA3AF;">영업 활동</h4>
+              <div class="tl-empty">영업 활동 기록 없음 — 추후 연락 대기 중</div>
+            </div>
+          </div>
+          <div class="tl-layer empty" style="padding-top:8px;">
+            <div class="badge" style="background:#E5DACF;">L4</div>
+            <div class="tl-card" style="background:#F9FAFB; border-color:#E5E7EB;">
+              <h4 style="color:#9CA3AF;">계약 체결</h4>
+              <div class="tl-empty">—</div>
+            </div>
+          </div>
           </div>
 
         </div>
@@ -985,7 +1313,7 @@ body {
 
   <div class="annotations">
     <h3>주요 인터랙션</h3>
-    <div class="annotation-item"><div class="num">1</div><div>좌측 리드 목록은 기본적으로 최신 인입 역순. 필터(등급/산업/위닝여부)로 필터링 가능. 리드 클릭 시 우측 타임라인 갱신.</div></div>
+    <div class="annotation-item"><div class="num">1</div><div>좌측 리드 목록은 기본적으로 최신 인입 역순. 필터(등급/산업/계약완료여부)로 필터링 가능. 리드 클릭 시 우측 타임라인 갱신.</div></div>
     <div class="annotation-item"><div class="num">2</div><div>L2가 비어있는 리드(쓰레드 대응이 없는 리드)는 L2 뱃지가 회색으로 표시되고 "대응 기록 없음"으로 나타남. 같은 방식으로 L3·L4가 비어있으면 해당 단계가 회색.</div></div>
     <div class="annotation-item"><div class="num">3</div><div>L3의 영업 활동이 여러 건인 경우 날짜순으로 모두 표시. 각 활동의 Action Item은 확장 가능.</div></div>
     <div class="annotation-item"><div class="num">4</div><div>마더사 경유 계약의 경우 L4 카드에 "직접 계약사: LGCNS / 최종 고객사: HMM"처럼 두 줄로 분리 표시.</div></div>
@@ -1183,7 +1511,7 @@ body {
           </div>
         </div>
         <div style="margin-top: 14px; padding: 10px 12px; background: #FDFBF9; border-radius: 6px; font-size: 11px; color: #6B7280; line-height: 1.5;">
-          <b style="color:#B81D3A;">해석 팁.</b> 상담·협업 유형에서 주로 계약 발생. NOA(AI)·기술 연동은 초기 단계는 나오지만 계약까지 못 가는 구조 — 도입 의사결정 과정에서 추가 설득 자산이 필요.
+          <b style="color:#B81D3A;">해석 팁.</b> 상담·협업 유형에서 주로 계약 발생. NOA(AI)·기술 연동은 초기 단계는 나오지만 계약까지 못 가는 구조.
         </div>
       </div>
 
@@ -1194,17 +1522,17 @@ body {
     <h3>주요 인터랙션</h3>
     <div class="annotation-item"><div class="num">1</div><div>리드 등급(1·2·3등급)은 LeadFlow 리드 판단 자동화에서 이미 부여한 값을 그대로 사용. 신규 로직 없음. 1등급 = 최우선 QL (직원 100인↑ + 매출 100억↑), 2등급 = QL, 3등급 = QL (1·2등급 조건 미달).</div></div>
     <div class="annotation-item"><div class="num">2</div><div>셀 클릭 시 해당 조건의 리드 목록 팝업. 팝업 내 리드 클릭 시 화면 2(타임라인)로 이동.</div></div>
-    <div class="annotation-item"><div class="num">3</div><div>문의 유형은 기존 리드 현황 대시보드에서 이미 분류되어 있는 '상담 · 협업 · NOA(AI) · 기술 연동 · 기타' 값을 그대로 재사용. 신규 분류 로직 없음. 계약률 = 위닝 건수 ÷ 쓰레드 응답 건수.</div></div>
+    <div class="annotation-item"><div class="num">3</div><div>문의 유형은 기존 리드 현황 대시보드에서 이미 분류되어 있는 '상담 · 협업 · NOA(AI) · 기술 연동 · 기타' 값을 그대로 재사용. 신규 분류 로직 없음. 계약률 = 계약 완료 건수 ÷ 쓰레드 응답 건수.</div></div>
   </div>
 
 </div>
 
-<!-- ==================== Screen 4: 위닝 케이스 프로파일 ==================== -->
+<!-- ==================== Screen 4: 계약 완료 케이스 프로파일 ==================== -->
 <div class="screen" id="s4">
 
   <div class="screen-header">
     <div>
-      <h2>화면 4 · 위닝 케이스 프로파일</h2>
+      <h2>화면 4 · 계약 완료 케이스 프로파일</h2>
       <div class="desc">계약에 이른 리드의 공통 특성을 귀납적으로 도출. 마케팅 기여율의 최소 수준과 패턴.</div>
     </div>
     <div class="period-filter">
@@ -1219,7 +1547,7 @@ body {
   <div class="metabase-frame">
     <div class="mb-topbar">
       <div>
-        <div class="title">위닝 케이스 — 마케팅 리드 기인 계약</div>
+        <div class="title">계약 완료 케이스 — 마케팅 리드 기인 계약</div>
         <div class="sub">기간 내 #breaking-through 계약 공지 중 #리드등록알림 기인이 확인된 건</div>
       </div>
     </div>
@@ -1233,12 +1561,12 @@ body {
           <div class="delta">#breaking-through 기준</div>
         </div>
         <div class="kpi-card">
-          <div class="label">마케팅 리드 기인 위닝</div>
+          <div class="label">마케팅 리드 기인 계약 완료</div>
           <div class="value accent">3</div>
           <div class="delta up">기여율 17.6%</div>
         </div>
         <div class="kpi-card">
-          <div class="label">Time-to-Close 중앙값</div>
+          <div class="label">Time-to-Close 평균</div>
           <div class="value">45</div>
           <div class="delta">일 · 범위 28~161일</div>
         </div>
@@ -1246,12 +1574,12 @@ body {
 
       <div class="winning-wrap">
 
-        <!-- 위닝 케이스 목록 -->
+        <!-- 계약 완료 케이스 목록 -->
         <div class="card winning-list-card">
-          <div class="card-title">위닝 케이스 목록<span class="ann-dot">2</span></div>
+          <div class="card-title">계약 완료 케이스 목록<span class="ann-dot">2</span></div>
           <div class="card-sub">계약일 역순. 클릭 시 화면 2로 이동.</div>
           <div class="list" style="margin-top: 12px;">
-            <div class="winning-item">
+            <div class="winning-item" onclick="switchScreen('s2','c1')" style="cursor:pointer;">
               <div class="top">
                 <div class="company">하나은행</div>
                 <div class="date">2025-10-15</div>
@@ -1261,7 +1589,7 @@ body {
                 <span>금융 · 홈페이지 · DWorks CS Talk · 161일</span>
               </div>
             </div>
-            <div class="winning-item">
+            <div class="winning-item" onclick="switchScreen('s2','c2')" style="cursor:pointer;">
               <div class="top">
                 <div class="company">(주)리드넘버</div>
                 <div class="date">2025-09-12</div>
@@ -1271,7 +1599,7 @@ body {
                 <span>IT · 전화 · DWorks Salesbridge · 68일</span>
               </div>
             </div>
-            <div class="winning-item">
+            <div class="winning-item" onclick="switchScreen('s2','c1')" style="cursor:pointer;">
               <div class="top">
                 <div class="company">삼성카드</div>
                 <div class="date">2025-09-19</div>
@@ -1287,7 +1615,7 @@ body {
         <!-- 공통 특성 프로파일 -->
         <div class="card">
           <div class="card-title">공통 특성 프로파일<span class="ann-dot">3</span></div>
-          <div class="card-sub">위닝 케이스 3건의 특성 분포</div>
+          <div class="card-sub">계약 완료 케이스 3건의 특성 분포</div>
 
           <div class="profile-charts" style="margin-top: 16px;">
 
@@ -1331,7 +1659,7 @@ body {
       <!-- 추세 -->
       <div class="card" style="margin-top: 16px;">
         <div class="card-title">기여율 추세<span class="ann-dot">4</span></div>
-        <div class="card-sub">월별 마케팅 리드 기인 위닝 비율. 숫자가 낮아도 우상향이면 마케팅 기여 증명.</div>
+        <div class="card-sub">월별 마케팅 리드 기인 계약 완료 비율. 숫자가 낮아도 우상향이면 마케팅 기여 증명.</div>
         <svg viewBox="0 0 800 180" style="width:100%; height:180px; margin-top: 16px;">
           <line x1="40" y1="150" x2="780" y2="150" stroke="#E5DACF" stroke-width="1"/>
           <line x1="40" y1="20" x2="40" y2="150" stroke="#E5DACF" stroke-width="1"/>
@@ -1366,8 +1694,8 @@ body {
   <div class="annotations">
     <h3>주요 인터랙션</h3>
     <div class="annotation-item"><div class="num">1</div><div>전체 계약 카드 클릭 시 #breaking-through 전체 목록 표시 (마케팅 기인 외 SI 경유 등 전수). 기여율 맥락 이해용.</div></div>
-    <div class="annotation-item"><div class="num">2</div><div>위닝 케이스 목록 아이템 클릭 시 화면 2(여정 타임라인)으로 이동하여 해당 리드의 전체 여정 확인.</div></div>
-    <div class="annotation-item"><div class="num">3</div><div>프로파일은 위닝 건수가 적을수록 신뢰도가 낮음. 최소 표본 경고(예: "N=3, 표본이 작아 패턴 해석 주의")를 카드 하단에 자동 표시.</div></div>
+    <div class="annotation-item"><div class="num">2</div><div>계약 완료 케이스 목록 아이템 클릭 시 화면 2(여정 타임라인)으로 이동하여 해당 리드의 전체 여정 확인.</div></div>
+    <div class="annotation-item"><div class="num">3</div><div>프로파일은 계약 완료 건수가 적을수록 신뢰도가 낮음. 최소 표본 경고(예: "N=3, 표본이 작아 패턴 해석 주의")를 카드 하단에 자동 표시.</div></div>
     <div class="annotation-item"><div class="num">4</div><div>추세 선은 월별 집계. 숫자가 낮아도 우상향이면 마케팅 파이프라인의 기여 증가 증명. 기준선(0%)을 강조.</div></div>
   </div>
 
@@ -1376,16 +1704,201 @@ body {
 </div>
 
 <script>
+function switchScreen(screenId, caseId) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const targetTab = document.querySelector(`.tab[data-screen="${screenId}"]`);
+  if (targetTab) targetTab.classList.add('active');
+  const targetScreen = document.getElementById(screenId);
+  if (targetScreen) targetScreen.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // 화면 2로 이동 시 특정 케이스 선택
+  if (screenId === 's2' && caseId) {
+    const targetItem = document.querySelector(`.lead-item[data-case="${caseId}"]`);
+    if (targetItem) showCase(caseId, targetItem);
+  }
+}
+
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
-    const screen = tab.dataset.screen;
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById(screen).classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    switchScreen(tab.dataset.screen);
   });
 });
+</script>
+
+<!-- 슬랙 원문 모달 -->
+<div class="slack-modal-overlay" id="slackModal" onclick="closeSlackModal(event)">
+  <div class="slack-modal">
+    <div class="slack-modal-header">
+      <span class="channel" id="modalChannel">#리드등록알림</span>
+      <button class="close-btn" onclick="document.getElementById('slackModal').classList.remove('open')">✕</button>
+    </div>
+    <div class="slack-modal-body">
+      <div class="slack-msg-meta" id="modalMeta"></div>
+      <div class="slack-msg-content" id="modalContent"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showCase(caseId, el) {
+  // 리드 목록 선택 표시
+  document.querySelectorAll('.lead-item').forEach(i => i.classList.remove('selected'));
+  el.classList.add('selected');
+  // 타임라인 패널 전환
+  ['c1','c2','c3','c4'].forEach(c => {
+    const el = document.getElementById('case-' + c);
+    if (el) el.style.display = c === caseId ? 'block' : 'none';
+  });
+}
+
+const slackData = {
+  l1: {
+    channel: '#리드등록알림 · 봇 메시지',
+    meta: '2025-05-07 09:12 · LeadFlow Bot',
+    content: `📥 신규 리드 도착!
+
+접수일자: 2025-05-07
+인입 채널: 홈페이지
+기업명: 하나은행
+담당자: 김** / 010-****-****
+문의내용: 다국어 채팅상담 서비스 도입 검토 중. 영상예약상담까지 포함 가능한지 문의드립니다.
+
+사업자번호: 209-81-00001
+직원수: 14,000명
+매출: 26조원
+→ 자동 판정: 1등급 (최우선 QL)`
+  },
+  l2: {
+    channel: '#리드등록알림 · 쓰레드',
+    meta: '2025-05-07 14:33 · 상현',
+    content: `@도헌 @지석 하나은행 문의 확인했습니다.
+
+다국어 채팅상담 도입 검토 건으로, 규모 있는 건이라 우선 대응합니다.
+
+[대응 내용]
+• 제품 소개서 송부 완료
+• 비용 안내 메일 발송
+• 대면 미팅 일정 제안 → 담당자 컨택 중, 다음 주 일정 조율 예정`
+  },
+  l3: {
+    channel: '#all-영업활동공유',
+    meta: '2025-05-14 / 2025-06-03 / 2025-07-15 · 도헌, 지석',
+    content: `[하나은행 - 다국어 채팅상담 서비스 대면미팅]
+• 일시: 2025-05-14 오후 / 하나은행 본사 방문
+• 참석자: 하나은행 IT운영팀 이정규 책임 / 스펙트라 도헌, 지석
+• 내용: DWorks CS Talk 다국어 채팅상담 요건 확인 및 데모 시연. 영어·중국어·일어 실시간 번역 기능에 긍정 반응.
+• Action: RFP 수령 후 가격 제안
+
+---
+
+[하나은행 - RFP 수령 및 가격 협의]
+• 일시: 2025-06-03
+• RFP 공식 수령. 경쟁사 비교 견적 인포뱅크에 요청한 상황이라고 함.
+• 스펙트라 제안 공수 산정 후 안내 예정
+
+---
+
+[하나은행 - 최종 기술 협의 및 계약 조건 확정]
+• 일시: 2025-07-15
+• 구축형 + 다국어 언어팩 포함으로 최종 협의 완료
+• 계약 조건 확정. 고객사 내부 사업 승인 대기 중.`
+  },
+  l4: {
+    channel: '#breaking-through · 계약공지',
+    meta: '2025-10-15 · 김혜선',
+    content: `🎉 [계약공지] 하나은행 "하나 EZ 다국어 채팅상담 서비스 도입"
+
+고객사: 하나은행
+사업명: 하나 EZ 앱 전용 다국어 채팅상담 화면 개발
+대고객 오픈 예정일: 2025-09-23
+
+제품: DWorks CS Talk 14.9
+구축형태: 구축형
+라이선스: 도메인 1, 사용자 50
+
+Time-to-Close: 161일 (2025-05-07 인입 → 2025-10-15 계약)`
+  },
+  planai_l1: {
+    channel: '#리드등록알림 · 봇 메시지',
+    meta: '2026-04-13 13:36 · LeadFlow Bot',
+    content: `💌 신규 리드 등록
+
+접수일자: 2026-04-13
+인입 채널: 대표전화
+기업명: 플랜아이
+사업자등록번호: 305-81-72470
+담당자: 이재만 수석님
+담당자 전화번호: 010-3003-5996
+문의내용: 주로 공공기관을 고객으로 시스템운영 업무를 주로 하고 있음. 곧 정통부 주최의 AI Festival에 참가할 예정인데 카카오상담톡 관련 대행사로 스펙트라와 협의해도 되는지?
+긴급도: 높음(1-2일 내 회신 필요)
+비고: 가능 여부만이라도 빠르게 회신 요청 했습니다.
+등록자: 김건우_HR
+
+→ 자동 판정: 1등급 (최우선 QL) · 직원 110명 · 매출 395.4억`
+  },
+  planai_l2: {
+    channel: '#리드등록알림 · 쓰레드',
+    meta: '2026-04-13 · 이종석',
+    content: `이종석: 경쟁업체 아닌가 생각되는데..`
+  },
+  game_l1: {
+    channel: '#리드등록알림 · 봇 메시지',
+    meta: '2026-04-16 10:12 · LeadFlow Bot',
+    content: `💌 신규 리드 등록
+
+접수일자: 2026-04-16
+인입 채널: 대표전화
+기업명: 더게임
+담당자: 백정현
+담당자 전화번호: 010-2690-8696
+문의내용: 카카오톡 상담 신규 도입 문의
+긴급도: 높음(1-2일 내 회신 필요)
+등록자: 민철(E팀)
+
+→ 자동 판정: 5등급 (비QL) · 기업정보 보강 미완료`
+  },
+  game_l2: {
+    channel: '#리드등록알림 · 쓰레드',
+    meta: '2026-04-16 · 제은비',
+    content: `제은비: 업체에서 개발한 AI 학회서비스에 상담톡 연결 희망하며, 상담톡 API만 사용하는것으로 문의하여 월 비용 안내. 타 업체도 비교중이라고 하며, 추후 연락주기로 하였음.`
+  },
+  rn_l1: {
+    channel: '#리드등록알림 · 수동 등록',
+    meta: '2025-07-07 14:01 · 김건우_HR',
+    content: `카카오상담톡 도입 문의 있어 메모 드립니다
+• 경로 : 대표전화
+• 기업명 : (주)리드넘버
+• 담당자 : 홍명표 선생님
+• 연락처 : 010-8862-4103
+• 기타 멘트 : 현재 무료버전 사용 중이나. 계정제한에 걸렸음. 그 외에 여러가지 연동 가능 문의 드리고싶음
+
+조금 빠르게 콜백해주시면 대단히 감사하겠습니다~`
+  },
+  rn_l2: {
+    channel: '#리드등록알림 · 쓰레드',
+    meta: '2025-07-07 · 김혜선',
+    content: `김혜선: 카카오상담톡 api 문의 대응, 채널 1개 기준으로 api 운영비 가견적 송부
+(홍명표팀장 / myoungpyo.hong@readnumber.com)
+
+김혜선: 비즈메시지 사용중인데 사용량이 일부 많아져 제한이 걸렸다고 합니다.
+상담톡 기능에 대해서는 담당자도 어느정도 파악이 된 것 같으며, 내부 개발로 api 사용 문의였습니다.`
+  }
+};
+
+function openSlackModal(layer) {
+  const d = slackData[layer];
+  document.getElementById('modalChannel').textContent = d.channel;
+  document.getElementById('modalMeta').textContent = d.meta;
+  document.getElementById('modalContent').textContent = d.content;
+  document.getElementById('slackModal').classList.add('open');
+}
+
+function closeSlackModal(e) {
+  if (e.target === document.getElementById('slackModal')) {
+    document.getElementById('slackModal').classList.remove('open');
+  }
+}
 </script>
 
 </body>
