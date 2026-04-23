@@ -835,8 +835,8 @@ body {
         </div>
         <div class="kpi-card">
           <div class="label">Time-to-Close 평균</div>
-          <div class="value">—</div>
-          <div class="delta" style="color:#9CA3AF;">Phase 9+ 이후 자동화</div>
+          <div class="value">194</div>
+          <div class="delta">일 (3건 기준 · 오픈일 기준)</div>
         </div>
       </div>
 
@@ -945,22 +945,42 @@ body {
         </div>
 
         <div class="card">
-          <div class="card-title">단계별 현재 체류 리드<span class="ann-dot">6</span></div>
-          <div class="card-sub">이번 달 기준 각 단계에 머물러 있는 리드 수 (최신 액션 기준)</div>
+          <div class="card-title">단계별 파이프라인 현황<span class="ann-dot">6</span></div>
+          <div class="card-sub">연간 기준 · 드랍까지 소요일 = L1 ~ L2 마지막 활동일 · 다음 단계 전환 소요일 = 해당 단계 진입 ~ 다음 단계 진입 (하나은행 계약 완료 케이스 기준)</div>
           <table style="width: 100%; font-size: 12px; margin-top: 12px; border-collapse: collapse;">
             <thead>
               <tr style="color:#6B7280; font-size:11px; border-bottom: 1px solid #F0E8E2;">
                 <th style="text-align:left; padding:8px 0;">단계</th>
                 <th style="text-align:right;">건수</th>
-                <th style="text-align:right;">평균 체류일</th>
-                <th style="text-align:right;">최장 체류</th>
+                <th style="text-align:right;">드랍까지 소요일 (최장)</th>
+                <th style="text-align:right;">다음 단계 전환 소요일</th>
               </tr>
             </thead>
             <tbody>
-              <tr style="border-bottom: 1px solid #F5EDE7;"><td style="padding:10px 0;">쓰레드 응답 (더 나아가지 못함)</td><td style="text-align:right; font-weight:600;">10</td><td style="text-align:right; color:#6B7280;">14일</td><td style="text-align:right; color:#DC2626;">42일</td></tr>
-              <tr style="border-bottom: 1px solid #F5EDE7;"><td style="padding:10px 0;">소개서 공유 (회신 대기)</td><td style="text-align:right; font-weight:600;">19</td><td style="text-align:right; color:#6B7280;">21일</td><td style="text-align:right; color:#DC2626;">58일</td></tr>
-              <tr style="border-bottom: 1px solid #F5EDE7;"><td style="padding:10px 0;">미팅 진행 (영업 중)</td><td style="text-align:right; font-weight:600;">9</td><td style="text-align:right; color:#6B7280;">11일</td><td style="text-align:right; color:#6B7280;">31일</td></tr>
-              <tr><td style="padding:10px 0;">계약 체결 <span style="color:#6B7280; font-size:10px;">(Time-to-Close)</span></td><td style="text-align:right; font-weight:600; color:#B81D3A;">3</td><td style="text-align:right; color:#6B7280;">91일</td><td style="text-align:right; color:#6B7280;">161일</td></tr>
+              <tr style="border-bottom: 1px solid #F5EDE7;">
+                <td style="padding:10px 0;">쓰레드 응답</td>
+                <td style="text-align:right; font-weight:600;">10</td>
+                <td style="text-align:right; color:#DC2626; font-weight:600;">42일</td>
+                <td style="text-align:right; color:#6B7280;">5시간 21분</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #F5EDE7;">
+                <td style="padding:10px 0;">소개서 공유</td>
+                <td style="text-align:right; font-weight:600;">19</td>
+                <td style="text-align:right; color:#DC2626; font-weight:600;">58일</td>
+                <td style="text-align:right; color:#6B7280;">7일</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #F5EDE7;">
+                <td style="padding:10px 0;">미팅 진행</td>
+                <td style="text-align:right; font-weight:600;">9</td>
+                <td style="text-align:right; color:#6B7280;">31일</td>
+                <td style="text-align:right; color:#6B7280;">62일</td>
+              </tr>
+              <tr>
+                <td style="padding:10px 0;">계약 체결 <span style="color:#6B7280; font-size:10px;">(계약조건 확정→체결)</span></td>
+                <td style="text-align:right; font-weight:600; color:#B81D3A;">3</td>
+                <td style="text-align:right; color:#9CA3AF;">—</td>
+                <td style="text-align:right; color:#DC2626; font-weight:600;">92일</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -977,7 +997,7 @@ body {
     <div class="annotation-item"><div class="num">3</div><div>퍼널 각 단계 바 클릭 시 해당 단계 리드 목록으로 드릴다운. 개별 리드 클릭은 화면 2(여정 타임라인)로 이동.</div></div>
     <div class="annotation-item"><div class="num">4</div><div>등급별 막대는 1/2/3등급 각각의 미팅 단계 도달률. 카드 클릭 시 해당 등급만 필터링된 퍼널로 전환.</div></div>
     <div class="annotation-item"><div class="num">5</div><div>Handoff Lag 히스토그램. 24시간 초과 구간이 핵심 관리 지표. 해당 막대 클릭 시 초과 리드 목록 팝업.</div></div>
-    <div class="annotation-item"><div class="num">6</div><div>'최장 체류' 값이 붉게 표시된 리드는 장기 방치 리스크 리드. 행 클릭 시 화면 2로 이동.</div></div>
+    <div class="annotation-item"><div class="num">6</div><div>드랍까지 소요일(최장)이 붉게 표시된 단계는 장기 방치 리스크. 행 클릭 시 화면 2로 이동하여 해당 단계 리드 여정 확인.</div></div>
   </div>
 
 </div>
@@ -1071,8 +1091,71 @@ body {
             </div>
           </div>
 
-          <div style="margin-top: 12px; border-top: 1px solid #F5EDE7; padding-top: 10px; font-size:10px; color:#9CA3AF;">
-            + 오토메타, 이노뱃, TEMU 외 25건
+          <div style="margin-top: 12px; border-top: 1px solid #F5EDE7; padding-top: 10px;">
+
+          <!-- 이노밧 -->
+          <div class="lead-item" data-case="c5" onclick="showCase('c5', this)">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div class="company">이노밧</div>
+              <span style="font-size:9px; background:#6B7280; color:white; padding:1px 6px; border-radius:3px; font-weight:700;">응답 완료</span>
+            </div>
+            <div class="meta">2026-04-09 · 전화 · 3등급</div>
+            <div style="margin-top:4px; display:flex; gap:4px;">
+              <span style="font-size:9px; background:#FCD8E0; color:#B81D3A; padding:1px 5px; border-radius:2px;">응답</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">소개서</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">미팅</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">계약</span>
+            </div>
+          </div>
+
+          <!-- (주)오토메타 -->
+          <div class="lead-item" data-case="c6" onclick="showCase('c6', this)">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div class="company">(주)오토메타</div>
+              <span style="font-size:9px; background:#6B7280; color:white; padding:1px 6px; border-radius:3px; font-weight:700;">응답 완료</span>
+            </div>
+            <div class="meta">2026-04-14 · NOA · 2등급</div>
+            <div style="margin-top:4px; display:flex; gap:4px;">
+              <span style="font-size:9px; background:#FCD8E0; color:#B81D3A; padding:1px 5px; border-radius:2px;">응답</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">소개서</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">미팅</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">계약</span>
+            </div>
+          </div>
+
+          <!-- 정모소프트 -->
+          <div class="lead-item" data-case="c7" onclick="showCase('c7', this)">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div class="company">정모소프트</div>
+              <span style="font-size:9px; background:#6B7280; color:white; padding:1px 6px; border-radius:3px; font-weight:700;">응답 완료</span>
+            </div>
+            <div class="meta">2026-04-15 · 전화 · 3등급</div>
+            <div style="margin-top:4px; display:flex; gap:4px;">
+              <span style="font-size:9px; background:#FCD8E0; color:#B81D3A; padding:1px 5px; border-radius:2px;">응답</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">소개서</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">미팅</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">계약</span>
+            </div>
+          </div>
+
+          <!-- 메디솔브 AI -->
+          <div class="lead-item" data-case="c8" onclick="showCase('c8', this)">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div class="company">메디솔브 AI</div>
+              <span style="font-size:9px; background:#6B7280; color:white; padding:1px 6px; border-radius:3px; font-weight:700;">응답 완료</span>
+            </div>
+            <div class="meta">2026-04-20 · 전화 · 5등급</div>
+            <div style="margin-top:4px; display:flex; gap:4px;">
+              <span style="font-size:9px; background:#FCD8E0; color:#B81D3A; padding:1px 5px; border-radius:2px;">응답</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">소개서</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">미팅</span>
+              <span style="font-size:9px; background:#E5E7EB; color:#9CA3AF; padding:1px 5px; border-radius:2px;">계약</span>
+            </div>
+          </div>
+
+          <div style="font-size:10px; color:#9CA3AF; padding: 8px 2px 0;">
+            + TEMU, 와지텍, 날리지큐브 외 21건
+          </div>
           </div>
         </div>
 
@@ -1135,7 +1218,7 @@ body {
               <h4 style="color:#B81D3A;">🎉 계약 체결 <span style="color:#6B7280; font-weight:400; font-size:11px; margin-left:8px;">#breaking-through</span></h4>
               <div class="when">2025-10-15 · Time-to-Close <b style="color:#B81D3A;">161일</b></div>
               <div class="detail">
-                <div class="detail-line"><b>제품</b>DWorks CS Talk (구축형 + 다국어 채팅상담)</div>
+                <div class="detail-line"><b>제품</b>Cowork+ 상담 (구축형 + 다국어 채팅상담)</div>
                 <div class="detail-line"><b>직접 계약사</b>하나은행</div>
               </div>
               <button class="slack-link-btn">💬 슬랙 원문 보기</button>
@@ -1308,6 +1391,124 @@ body {
 
         </div>
       </div>
+
+<!-- c5: 이노밧 -->
+<template id="tpl-c5">
+<div class="timeline-header">
+  <h3>이노밧 · 카카오 상담톡 구현 절차·견적 문의</h3>
+  <div class="info"><span>3등급 (QL)</span><span class="tag" style="background:#F3F4F6; color:#6B7280;">응답 완료</span></div>
+</div>
+<div class="tl-layer"><div class="badge">L1</div>
+  <div class="tl-card" onclick="openSlackModal('inobat_l1')">
+    <h4>리드 인입 <span style="color:#6B7280; font-weight:400; font-size:11px;">#리드등록알림 수동 등록</span></h4>
+    <div class="when" style="font-size:14px; font-weight:700; color:#1F1F1F; margin-bottom:8px;">2026-04-09 15:35</div>
+    <div class="detail">
+      <div class="detail-line"><b>기업명</b>이노밧 (세금신고 플랫폼)</div>
+      <div class="detail-line"><b>채널</b>대표전화</div>
+      <div class="detail-line"><b>담당자</b>김민규 · 010-4006-0599</div>
+      <div class="detail-line"><b>문의내용</b>카카오 상담톡 구현을 하고싶습니다. 절차와 견적을 문의드립니다.</div>
+    </div>
+    <button class="slack-link-btn">💬 슬랙 원문 보기</button>
+  </div>
+</div>
+<div class="tl-gap short"><div class="gap-line"></div><div><span class="gap-badge">↓ 당일 대응</span></div></div>
+<div class="tl-layer"><div class="badge">L2</div>
+  <div class="tl-card"><h4>1차 대응 <span style="color:#6B7280; font-weight:400; font-size:11px;">#리드등록알림 쓰레드</span></h4>
+    <div class="when" style="font-size:14px; font-weight:700; color:#1F1F1F; margin-bottom:8px;">2026-04-10 09:11 · 김상현</div>
+    <div class="detail">
+      <div class="detail-line"><b>지시</b>@은비 단독처리해주세요. 니즈 확실하면 다시 말씀해주세요.</div>
+      <div class="detail-line"><b>판단</b>시스템 구축전까지 분류를 이 정도 리드로 판단됩니다.</div>
+    </div></div>
+</div>
+<div class="tl-layer empty"><div class="badge" style="background:#E5DACF;">L3</div><div class="tl-card" style="background:#F9FAFB; border-color:#E5E7EB;"><h4 style="color:#9CA3AF;">영업 활동</h4><div class="tl-empty">—</div></div></div>
+<div class="tl-layer empty"><div class="badge" style="background:#E5DACF;">L4</div><div class="tl-card" style="background:#F9FAFB; border-color:#E5E7EB;"><h4 style="color:#9CA3AF;">계약 체결</h4><div class="tl-empty">—</div></div></div>
+</template>
+
+<!-- c6: 오토메타 -->
+<template id="tpl-c6">
+<div class="timeline-header">
+  <h3>(주)오토메타 · 카카오 상담톡 연동 문의</h3>
+  <div class="info"><span>2등급 (QL)</span><span class="tag" style="background:#F3F4F6; color:#6B7280;">응답 완료</span></div>
+</div>
+<div class="tl-layer"><div class="badge">L1</div>
+  <div class="tl-card" onclick="openSlackModal('otometa_l1')">
+    <h4>리드 인입 <span style="color:#6B7280; font-weight:400; font-size:11px;">#리드등록알림 봇 메시지</span></h4>
+    <div class="when" style="font-size:14px; font-weight:700; color:#1F1F1F; margin-bottom:8px;">2026-04-14 13:51</div>
+    <div class="detail">
+      <div class="detail-line"><b>기업명</b>(주)오토메타</div>
+      <div class="detail-line"><b>채널</b>카카오 상담톡</div>
+      <div class="detail-line"><b>담당자</b>심현복 · 010-2034-3619</div>
+      <div class="detail-line"><b>문의내용</b>(주)오토메타에서 카카오 상담톡을 통해 상담 연동 문의를 접수했습니다.</div>
+    </div>
+    <button class="slack-link-btn">💬 슬랙 원문 보기</button>
+  </div>
+</div>
+<div class="tl-gap short"><div class="gap-line"></div><div><span class="gap-badge">↓ 당일 대응</span></div></div>
+<div class="tl-layer"><div class="badge">L2</div>
+  <div class="tl-card"><h4>1차 대응</h4><div class="tl-empty">이모지 확인 완료. 추가 대응 기록 없음.</div></div>
+</div>
+<div class="tl-layer empty"><div class="badge" style="background:#E5DACF;">L3</div><div class="tl-card" style="background:#F9FAFB; border-color:#E5E7EB;"><h4 style="color:#9CA3AF;">영업 활동</h4><div class="tl-empty">—</div></div></div>
+<div class="tl-layer empty"><div class="badge" style="background:#E5DACF;">L4</div><div class="tl-card" style="background:#F9FAFB; border-color:#E5E7EB;"><h4 style="color:#9CA3AF;">계약 체결</h4><div class="tl-empty">—</div></div></div>
+</template>
+
+<!-- c7: 정모소프트 -->
+<template id="tpl-c7">
+<div class="timeline-header">
+  <h3>정모소프트 · 카카오톡 상담 신규 도입 문의</h3>
+  <div class="info"><span>3등급 (QL)</span><span class="tag" style="background:#F3F4F6; color:#6B7280;">응답 완료</span></div>
+</div>
+<div class="tl-layer"><div class="badge">L1</div>
+  <div class="tl-card" onclick="openSlackModal('jungmo_l1')">
+    <h4>리드 인입 <span style="color:#6B7280; font-weight:400; font-size:11px;">#리드등록알림 봇 메시지</span></h4>
+    <div class="when" style="font-size:14px; font-weight:700; color:#1F1F1F; margin-bottom:8px;">2026-04-15 11:33</div>
+    <div class="detail">
+      <div class="detail-line"><b>기업명</b>정모소프트</div>
+      <div class="detail-line"><b>채널</b>대표전화</div>
+      <div class="detail-line"><b>담당자</b>안정모 · 010-4981-7049</div>
+      <div class="detail-line"><b>문의내용</b>카카오톡상담 신규인입문의</div>
+      <div class="detail-line"><b>긴급도</b>보통</div>
+    </div>
+    <button class="slack-link-btn">💬 슬랙 원문 보기</button>
+  </div>
+</div>
+<div class="tl-gap short"><div class="gap-line"></div><div><span class="gap-badge">↓ 당일 대응</span></div></div>
+<div class="tl-layer"><div class="badge">L2</div>
+  <div class="tl-card"><h4>1차 대응</h4><div class="tl-empty">이모지 확인 완료. 추가 대응 기록 없음.</div></div>
+</div>
+<div class="tl-layer empty"><div class="badge" style="background:#E5DACF;">L3</div><div class="tl-card" style="background:#F9FAFB; border-color:#E5E7EB;"><h4 style="color:#9CA3AF;">영업 활동</h4><div class="tl-empty">—</div></div></div>
+<div class="tl-layer empty"><div class="badge" style="background:#E5DACF;">L4</div><div class="tl-card" style="background:#F9FAFB; border-color:#E5E7EB;"><h4 style="color:#9CA3AF;">계약 체결</h4><div class="tl-empty">—</div></div></div>
+</template>
+
+<!-- c8: 메디솔브 AI -->
+<template id="tpl-c8">
+<div class="timeline-header">
+  <h3>메디솔브 AI · 카카오 상담톡 도입 문의</h3>
+  <div class="info"><span>5등급 (비QL)</span><span class="tag" style="background:#F3F4F6; color:#6B7280;">응답 완료</span></div>
+</div>
+<div class="tl-layer"><div class="badge">L1</div>
+  <div class="tl-card" onclick="openSlackModal('medai_l1')">
+    <h4>리드 인입 <span style="color:#6B7280; font-weight:400; font-size:11px;">#리드등록알림 봇 메시지</span></h4>
+    <div class="when" style="font-size:14px; font-weight:700; color:#1F1F1F; margin-bottom:8px;">2026-04-20 13:39</div>
+    <div class="detail">
+      <div class="detail-line"><b>기업명</b>메디솔브 AI</div>
+      <div class="detail-line"><b>채널</b>대표전화</div>
+      <div class="detail-line"><b>담당자</b>김사라 · 010-9879-6020</div>
+      <div class="detail-line"><b>문의내용</b>카카오 상담톡 도입 문의</div>
+      <div class="detail-line"><b>긴급도</b>높음 (1~2일 내 회신 필요)</div>
+    </div>
+    <button class="slack-link-btn">💬 슬랙 원문 보기</button>
+  </div>
+</div>
+<div class="tl-gap short"><div class="gap-line"></div><div><span class="gap-badge">↓ 당일 대응</span></div></div>
+<div class="tl-layer"><div class="badge">L2</div>
+  <div class="tl-card"><h4>1차 대응 <span style="color:#6B7280; font-weight:400; font-size:11px;">#리드등록알림 이모지</span></h4>
+    <div class="detail">
+      <div class="detail-line"><b>대응</b>✅ 이모지 확인 (기웅). 쓰레드 추가 대응 없음.</div>
+    </div></div>
+</div>
+<div class="tl-layer empty"><div class="badge" style="background:#E5DACF;">L3</div><div class="tl-card" style="background:#F9FAFB; border-color:#E5E7EB;"><h4 style="color:#9CA3AF;">영업 활동</h4><div class="tl-empty">—</div></div></div>
+<div class="tl-layer empty"><div class="badge" style="background:#E5DACF;">L4</div><div class="tl-card" style="background:#F9FAFB; border-color:#E5E7EB;"><h4 style="color:#9CA3AF;">계약 체결</h4><div class="tl-empty">—</div></div></div>
+</template>
     </div>
   </div>
 
@@ -1577,36 +1778,36 @@ body {
         <!-- 계약 완료 케이스 목록 -->
         <div class="card winning-list-card">
           <div class="card-title">계약 완료 케이스 목록<span class="ann-dot">2</span></div>
-          <div class="card-sub">계약일 역순. 클릭 시 화면 2로 이동.</div>
+          <div class="card-sub">오픈일 역순 · 클릭 시 화면 2로 이동.</div>
           <div class="list" style="margin-top: 12px;">
             <div class="winning-item" onclick="switchScreen('s2','c1')" style="cursor:pointer;">
               <div class="top">
-                <div class="company">하나은행</div>
-                <div class="date">2025-10-15</div>
+                <div class="company">가온전선</div>
+                <div class="date">오픈 2026-03-03</div>
               </div>
               <div class="bottom">
                 <span class="chip">1등급</span>
-                <span>금융 · 홈페이지 · DWorks CS Talk · 161일</span>
+                <span>제조 · 홈페이지 · Cowork+ 협업 · 207일</span>
               </div>
             </div>
             <div class="winning-item" onclick="switchScreen('s2','c2')" style="cursor:pointer;">
               <div class="top">
-                <div class="company">(주)리드넘버</div>
-                <div class="date">2025-09-12</div>
+                <div class="company">SK렌터카</div>
+                <div class="date">오픈 2026-02-19</div>
               </div>
               <div class="bottom">
-                <span class="chip">2등급</span>
-                <span>IT · 전화 · DWorks Salesbridge · 68일</span>
+                <span class="chip">1등급</span>
+                <span>유통·서비스 · 홈페이지 · Cowork+ 협업 · 213일</span>
               </div>
             </div>
             <div class="winning-item" onclick="switchScreen('s2','c1')" style="cursor:pointer;">
               <div class="top">
-                <div class="company">삼성카드</div>
-                <div class="date">2025-09-19</div>
+                <div class="company">하나은행</div>
+                <div class="date">계약 2025-10-15</div>
               </div>
               <div class="bottom">
                 <span class="chip">1등급</span>
-                <span>금융 · 홈페이지 · eNomix 고도화 · 45일</span>
+                <span>금융 · 홈페이지 · Cowork+ 상담 · 161일</span>
               </div>
             </div>
           </div>
@@ -1615,40 +1816,41 @@ body {
         <!-- 공통 특성 프로파일 -->
         <div class="card">
           <div class="card-title">공통 특성 프로파일<span class="ann-dot">3</span></div>
-          <div class="card-sub">계약 완료 케이스 3건의 특성 분포</div>
+          <div class="card-sub">계약 완료 케이스 3건의 특성 분포 · N=3, 표본이 작아 패턴 해석 주의</div>
 
           <div class="profile-charts" style="margin-top: 16px;">
 
             <div>
               <div class="mini-chart-title">등급 분포</div>
-              <div class="mini-bar"><div class="label">1등급</div><div class="track"><div class="fill" style="width:67%;"></div></div><div class="count">2</div></div>
-              <div class="mini-bar"><div class="label">2등급</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
+              <div class="mini-bar"><div class="label">1등급</div><div class="track"><div class="fill" style="width:100%;"></div></div><div class="count">3</div></div>
+              <div class="mini-bar"><div class="label">2등급</div><div class="track"><div class="fill" style="width:0%;"></div></div><div class="count">0</div></div>
               <div class="mini-bar"><div class="label">3등급</div><div class="track"><div class="fill" style="width:0%;"></div></div><div class="count">0</div></div>
             </div>
 
             <div>
-              <div class="mini-chart-title">산업 Tier</div>
-              <div class="mini-bar"><div class="label">Tier 1 금융</div><div class="track"><div class="fill" style="width:67%;"></div></div><div class="count">2</div></div>
-              <div class="mini-bar"><div class="label">Tier 2 IT</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
+              <div class="mini-chart-title">산업</div>
+              <div class="mini-bar"><div class="label">금융</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
+              <div class="mini-bar"><div class="label">제조</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
+              <div class="mini-bar"><div class="label">유통·서비스</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
             </div>
 
             <div>
               <div class="mini-chart-title">인입 채널</div>
-              <div class="mini-bar"><div class="label">홈페이지</div><div class="track"><div class="fill" style="width:67%;"></div></div><div class="count">2</div></div>
-              <div class="mini-bar"><div class="label">전화</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
+              <div class="mini-bar"><div class="label">홈페이지</div><div class="track"><div class="fill" style="width:100%;"></div></div><div class="count">3</div></div>
+              <div class="mini-bar"><div class="label">전화</div><div class="track"><div class="fill" style="width:0%;"></div></div><div class="count">0</div></div>
             </div>
 
             <div>
               <div class="mini-chart-title">제품</div>
-              <div class="mini-bar"><div class="label">DWorks CS Talk</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
-              <div class="mini-bar"><div class="label">DWorks Salesbridge</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
-              <div class="mini-bar"><div class="label">eNomix 고도화</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
+              <div class="mini-bar"><div class="label">Cowork+ 상담</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
+              <div class="mini-bar"><div class="label">Cowork+ 협업</div><div class="track"><div class="fill" style="width:67%;"></div></div><div class="count">2</div></div>
+              <div class="mini-bar"><div class="label">eNomix 고도화</div><div class="track"><div class="fill" style="width:0%;"></div></div><div class="count">0</div></div>
             </div>
 
             <div>
               <div class="mini-chart-title">문의 유형</div>
-              <div class="mini-bar"><div class="label">상담</div><div class="track"><div class="fill" style="width:67%;"></div></div><div class="count">2</div></div>
-              <div class="mini-bar"><div class="label">협업</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
+              <div class="mini-bar"><div class="label">상담</div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="count">1</div></div>
+              <div class="mini-bar"><div class="label">협업</div><div class="track"><div class="fill" style="width:67%;"></div></div><div class="count">2</div></div>
               <div class="mini-bar"><div class="label">NOA(AI)</div><div class="track"><div class="fill" style="width:0%;"></div></div><div class="count">0</div></div>
             </div>
 
@@ -1742,14 +1944,27 @@ document.querySelectorAll('.tab').forEach(tab => {
 
 <script>
 function showCase(caseId, el) {
-  // 리드 목록 선택 표시
   document.querySelectorAll('.lead-item').forEach(i => i.classList.remove('selected'));
   el.classList.add('selected');
-  // 타임라인 패널 전환
   ['c1','c2','c3','c4'].forEach(c => {
     const el = document.getElementById('case-' + c);
     if (el) el.style.display = c === caseId ? 'block' : 'none';
   });
+  // c5~c8: template 기반 렌더링
+  const panel = document.getElementById('timelinePanel');
+  if (['c5','c6','c7','c8'].includes(caseId)) {
+    ['c1','c2','c3','c4'].forEach(c => {
+      const el = document.getElementById('case-' + c);
+      if (el) el.style.display = 'none';
+    });
+    const tpl = document.getElementById('tpl-' + caseId);
+    let dyn = document.getElementById('case-dyn');
+    if (!dyn) { dyn = document.createElement('div'); dyn.id = 'case-dyn'; panel.appendChild(dyn); }
+    dyn.innerHTML = tpl ? tpl.innerHTML : '';
+  } else {
+    const dyn = document.getElementById('case-dyn');
+    if (dyn) dyn.innerHTML = '';
+  }
 }
 
 const slackData = {
@@ -1883,6 +2098,61 @@ Time-to-Close: 161일 (2025-05-07 인입 → 2025-10-15 계약)`
 
 김혜선: 비즈메시지 사용중인데 사용량이 일부 많아져 제한이 걸렸다고 합니다.
 상담톡 기능에 대해서는 담당자도 어느정도 파악이 된 것 같으며, 내부 개발로 api 사용 문의였습니다.`
+  },
+  inobat_l1: {
+    channel: '#리드등록알림 · 수동 등록',
+    meta: '2026-04-09 15:35 · 김건우_HR',
+    content: `카카오상담톡 도입 문의 있어 메모 드립니다
+• 경로 : 대표전화
+• 기업명 : 이노밧
+• 담당자 : 김민규
+• 연락처 : 010-4006-0599
+• 문의내용 : 카카오 상담톡 구현을 하고싶습니다. 절차와 견적을 문의드립니다.
+• 긴급도 : 높음(1-2일 내 회신 필요)
+• 비고 : https://inovat.tax/ko`
+  },
+  otometa_l1: {
+    channel: '#리드등록알림 · 봇 메시지',
+    meta: '2026-04-14 13:51 · 정미',
+    content: `💌 신규 리드 등록
+
+접수일자: 2026-04-14
+인입 채널: 카카오 상담톡
+기업명: (주)오토메타
+담당자: 심현복
+담당자 전화번호: 010-2034-3619
+문의내용: (주)오토메타에서 카카오 상담톡을 통해 상담 연동 문의를 접수했습니다. 담당자 연락처는 010-2034-3619입니다.
+긴급도: 보통`
+  },
+  jungmo_l1: {
+    channel: '#리드등록알림 · 봇 메시지',
+    meta: '2026-04-15 11:33 · 기환',
+    content: `💌 신규 리드 등록
+
+접수일자: 2026-04-15
+인입 채널: 대표전화
+기업명: 정모소프트
+담당자: 안정모
+담당자 전화번호: 010-4981-7049
+문의내용: 카카오톡상담 신규인입문의
+긴급도: 보통
+
+→ 자동 판정: 3등급 (QL)`
+  },
+  medai_l1: {
+    channel: '#리드등록알림 · 봇 메시지',
+    meta: '2026-04-20 13:39 · 기웅',
+    content: `💌 신규 리드 등록
+
+접수일자: 2026-04-20
+인입 채널: 대표전화
+기업명: 메디솔브 AI
+담당자: 김사라
+담당자 전화번호: 010-9879-6020
+문의내용: 카카오 상담톡 도입 문의
+긴급도: 높음(1-2일 내 회신 필요)
+
+→ 자동 판정: 5등급 (비QL) — 기업정보 보강 미완료`
   }
 };
 
