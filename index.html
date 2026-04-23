@@ -755,6 +755,18 @@ body {
   .screen { display: block !important; page-break-after: always; }
   body { background: white; }
 }
+/* ---------- 키워드 칩 ---------- */
+.kw-chip {
+  cursor: pointer;
+  padding: 4px 0;
+  transition: opacity 0.15s;
+  color: inherit;
+  display: block;
+}
+.kw-chip:hover { opacity: 0.65; }
+[data-cat="issue"].kw-chip { color: #DC2626; }
+[data-cat="feature"].kw-chip { color: #2563EB; }
+[data-cat="ops"].kw-chip { color: #4B5563; }
 </style>
 </head>
 <body>
@@ -868,6 +880,24 @@ body {
               <div class="label">④ 계약 체결<span class="badge">L4</span></div>
               <div class="bar-wrap"><div class="bar" style="width: 7%">3건</div></div>
               <div class="ratio">7.3%</div>
+            </div>
+            <div class="funnel-drop" style="color:#6B7280; font-size:11px;">↓ 이후 구간: 프로젝트 채널 기반 추적</div>
+            <div class="funnel-step" style="opacity:0.85;">
+              <div class="label">⑤ 프로젝트 착수<span class="badge" style="background:#6B7280;">L5</span></div>
+              <div class="bar-wrap"><div class="bar" style="width: 7%; background:#6B7280;">3건</div></div>
+              <div class="ratio" style="color:#6B7280;">7.3%</div>
+            </div>
+            <div class="funnel-drop" style="color:#6B7280; font-size:11px;">↓ 구축 기간 (하나은행 기준 ~7개월)</div>
+            <div class="funnel-step" style="opacity:0.85;">
+              <div class="label">⑥ 대고객 오픈<span class="badge" style="background:#6B7280;">L6</span></div>
+              <div class="bar-wrap"><div class="bar" style="width: 5%; background:#6B7280;">2건</div></div>
+              <div class="ratio" style="color:#6B7280;">4.9%</div>
+            </div>
+            <div class="funnel-drop" style="color:#9CA3AF; font-size:11px; border-left: 2px dashed #E5E7EB; padding-left:8px;">↓ CX 업무 영역 — SR 처리·KPI·갱신 추적</div>
+            <div class="funnel-step" style="opacity:0.7; border: 1px dashed #E5E7EB; border-radius:6px;">
+              <div class="label" style="color:#9CA3AF;">⑦ 운영 중 <span style="font-size:10px; background:#FEF3C7; color:#92400E; padding:1px 5px; border-radius:2px; margin-left:4px;">CX 영역</span><span class="badge" style="background:#D1D5DB; color:#6B7280;">L7</span></div>
+              <div class="bar-wrap"><div class="bar" style="width: 5%; background:#D1D5DB; color:#6B7280;">2건</div></div>
+              <div class="ratio" style="color:#9CA3AF;">운영 중</div>
             </div>
           </div>
         </div>
@@ -1222,6 +1252,39 @@ body {
                 <div class="detail-line"><b>직접 계약사</b>하나은행</div>
               </div>
               <button class="slack-link-btn">💬 슬랙 원문 보기</button>
+            </div>
+          </div>
+          <div class="tl-gap short"><div class="gap-line"></div><div><span class="gap-badge" style="background:#6B7280;">↓ 프로젝트 착수</span></div></div>
+          <div class="tl-layer">
+            <div class="badge" style="background:#6B7280;">L5</div>
+            <div class="tl-card" style="border-color:#9CA3AF; background:#F9FAFB;">
+              <h4 style="color:#374151;">🚀 프로젝트 착수 <span style="color:#6B7280; font-weight:400; font-size:11px; margin-left:8px;">#하나은행-cstalk-구축-prj-2026-001</span></h4>
+              <div class="when" style="font-size:14px; font-weight:700; color:#1F1F1F; margin-bottom:8px;">2026-04-08 채널 개설</div>
+              <div class="detail">
+                <div class="detail-line"><b>구분</b>구축형 (On-Premise)</div>
+                <div class="detail-line"><b>추가 요건</b>외환사업부 실시간 번역 채팅상담 추가 개발</div>
+                <div class="detail-line"><b>예정 M/M</b>고객사와 최종 1M/M 기준으로 확정</div>
+              </div>
+            </div>
+          </div>
+          <div class="tl-gap short"><div class="gap-line"></div><div><span class="gap-badge" style="background:#6B7280;">↓ CBT 2026-05-15 예정</span></div></div>
+          <div class="tl-layer">
+            <div class="badge" style="background:#6B7280;">L6</div>
+            <div class="tl-card" style="border-color:#9CA3AF; background:#F9FAFB; border-style:dashed;">
+              <h4 style="color:#6B7280;">📦 대고객 오픈 <span style="color:#9CA3AF; font-weight:400; font-size:11px; margin-left:8px;">예정</span></h4>
+              <div class="when" style="font-size:14px; font-weight:700; color:#9CA3AF; margin-bottom:8px;">2026-05-28 예정</div>
+              <div class="detail">
+                <div class="detail-line" style="color:#9CA3AF;"><b>CBT</b>2026-05-15 예정</div>
+                <div class="detail-line" style="color:#9CA3AF;"><b>정식 오픈</b>2026-05-28 예정</div>
+              </div>
+            </div>
+          </div>
+          <div class="tl-gap short"><div class="gap-line" style="border-color:#E5E7EB; border-style:dashed;"></div><div><span class="gap-badge" style="background:#E5E7EB; color:#9CA3AF; border:1px dashed #D1D5DB;">↓ CX 영역 인계</span></div></div>
+          <div class="tl-layer" style="opacity:0.6;">
+            <div class="badge" style="background:#D1D5DB; color:#6B7280;">L7</div>
+            <div class="tl-card" style="border-color:#E5E7EB; background:#F9FAFB; border-style:dashed;">
+              <h4 style="color:#9CA3AF;">🔧 운영 중 <span style="font-size:10px; background:#FEF3C7; color:#92400E; padding:1px 5px; border-radius:2px; margin-left:4px;">CX 영역</span></h4>
+              <div class="tl-empty" style="color:#9CA3AF;">SR 처리 · KPI 추적 · 갱신 여부 — CX 채널에서 추적</div>
             </div>
           </div>
           </div>
@@ -1890,6 +1953,71 @@ body {
         </svg>
       </div>
 
+      <!-- 운영 키워드 시그널 -->
+      <div class="card" style="margin-top: 16px;">
+        <div class="card-title">운영 키워드 시그널<span class="ann-dot">5</span></div>
+        <div class="card-sub">계약 완료 케이스의 프로젝트 채널(L5~L7)에서 자주 등장한 단어 · 키워드 클릭 시 단계별 언급 횟수 확인</div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:16px;">
+
+          <!-- 이슈 컬럼 -->
+          <div style="background:#FFF5F5; border:1px solid #FECACA; border-radius:10px; padding:16px;">
+            <div style="font-size:11px; font-weight:700; color:#DC2626; margin-bottom:12px; display:flex; align-items:center; gap:6px;">
+              <span style="width:8px; height:8px; background:#DC2626; border-radius:50%; display:inline-block;"></span>
+              이슈 · 불편 신호
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <span class="kw-chip" data-cat="issue" data-kw="법인폰 강제사용" data-l1="0" data-l3="1" data-l5="0" data-l7="8" data-companies="SK렌터카" style="font-size:17px; font-weight:800;">법인폰 강제사용</span>
+              <span class="kw-chip" data-cat="issue" data-kw="채널 전환 불편" data-l1="0" data-l3="0" data-l5="0" data-l7="5" data-companies="SK렌터카" style="font-size:15px; font-weight:700;">채널 전환 불편</span>
+              <span class="kw-chip" data-cat="issue" data-kw="보안 메일" data-l1="0" data-l3="0" data-l5="1" data-l7="3" data-companies="SK렌터카" style="font-size:13px; font-weight:600;">보안 메일</span>
+              <span class="kw-chip" data-cat="issue" data-kw="고객 안내 부담" data-l1="0" data-l3="0" data-l5="0" data-l7="2" data-companies="SK렌터카" style="font-size:12px; font-weight:500;">고객 안내 부담</span>
+            </div>
+          </div>
+
+          <!-- 기능요청 컬럼 -->
+          <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:16px;">
+            <div style="font-size:11px; font-weight:700; color:#2563EB; margin-bottom:12px; display:flex; align-items:center; gap:6px;">
+              <span style="width:8px; height:8px; background:#2563EB; border-radius:50%; display:inline-block;"></span>
+              기능 요청
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <span class="kw-chip" data-cat="feature" data-kw="Push 알림" data-l1="0" data-l3="0" data-l5="2" data-l7="6" data-companies="가온전선" style="font-size:17px; font-weight:800;">Push 알림</span>
+              <span class="kw-chip" data-cat="feature" data-kw="iOS 앱" data-l1="0" data-l3="0" data-l5="3" data-l7="4" data-companies="가온전선" style="font-size:15px; font-weight:700;">iOS 앱</span>
+              <span class="kw-chip" data-cat="feature" data-kw="다국어 번역" data-l1="1" data-l3="2" data-l5="1" data-l7="0" data-companies="하나은행" style="font-size:14px; font-weight:700;">다국어 번역</span>
+              <span class="kw-chip" data-cat="feature" data-kw="파일 공유" data-l1="0" data-l3="1" data-l5="1" data-l7="3" data-companies="가온전선,SK렌터카" style="font-size:13px; font-weight:600;">파일 공유</span>
+              <span class="kw-chip" data-cat="feature" data-kw="Language Set" data-l1="0" data-l3="0" data-l5="2" data-l7="2" data-companies="하나은행" style="font-size:12px; font-weight:500;">Language Set</span>
+            </div>
+          </div>
+
+          <!-- 운영 컬럼 -->
+          <div style="background:#F9FAFB; border:1px solid #E5E7EB; border-radius:10px; padding:16px;">
+            <div style="font-size:11px; font-weight:700; color:#6B7280; margin-bottom:12px; display:flex; align-items:center; gap:6px;">
+              <span style="width:8px; height:8px; background:#6B7280; border-radius:50%; display:inline-block;"></span>
+              운영 현황
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <span class="kw-chip" data-cat="ops" data-kw="패치 배포" data-l1="0" data-l3="0" data-l5="1" data-l7="5" data-companies="SK렌터카" style="font-size:15px; font-weight:700;">패치 배포</span>
+              <span class="kw-chip" data-cat="ops" data-kw="KPI 관리" data-l1="0" data-l3="0" data-l5="1" data-l7="4" data-companies="SK렌터카" style="font-size:14px; font-weight:600;">KPI 관리</span>
+              <span class="kw-chip" data-cat="ops" data-kw="SR 접수" data-l1="0" data-l3="0" data-l5="0" data-l7="3" data-companies="SK렌터카,가온전선" style="font-size:13px; font-weight:600;">SR 접수</span>
+              <span class="kw-chip" data-cat="ops" data-kw="TestFlight" data-l1="0" data-l3="0" data-l5="3" data-l7="0" data-companies="가온전선" style="font-size:12px; font-weight:500;">TestFlight</span>
+              <span class="kw-chip" data-cat="ops" data-kw="AI Insight" data-l1="0" data-l3="0" data-l5="1" data-l7="1" data-companies="가온전선" style="font-size:12px; font-weight:400;">AI Insight</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 툴팁 팝업 -->
+        <div id="kw-tooltip" style="display:none; position:fixed; background:white; border:1px solid #F0E8E2; border-radius:10px; padding:16px 20px; box-shadow:0 8px 24px rgba(0,0,0,0.12); z-index:9999; min-width:220px;">
+          <div id="kw-tooltip-title" style="font-size:14px; font-weight:700; margin-bottom:12px; color:#1F1F1F;"></div>
+          <div style="display:flex; flex-direction:column; gap:6px;" id="kw-tooltip-body"></div>
+          <div style="margin-top:10px; font-size:10px; color:#9CA3AF;">클릭 시 해당 채널 메시지로 드릴다운</div>
+        </div>
+
+        <div style="margin-top:12px; padding:8px 4px; font-size:11px; color:#9CA3AF; border-top:1px solid #F5EDE7;">
+          SK렌터카 · 가온전선 · 하나은행 프로젝트 채널(L5~L7) 기반 · 실제 구현 시 자동 집계
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -1899,6 +2027,7 @@ body {
     <div class="annotation-item"><div class="num">2</div><div>계약 완료 케이스 목록 아이템 클릭 시 화면 2(여정 타임라인)으로 이동하여 해당 리드의 전체 여정 확인.</div></div>
     <div class="annotation-item"><div class="num">3</div><div>프로파일은 계약 완료 건수가 적을수록 신뢰도가 낮음. 최소 표본 경고(예: "N=3, 표본이 작아 패턴 해석 주의")를 카드 하단에 자동 표시.</div></div>
     <div class="annotation-item"><div class="num">4</div><div>추세 선은 월별 집계. 숫자가 낮아도 우상향이면 마케팅 파이프라인의 기여 증가 증명. 기준선(0%)을 강조.</div></div>
+    <div class="annotation-item"><div class="num">5</div><div>키워드 클릭 시 해당 단어가 등장한 프로젝트 채널 메시지 목록으로 드릴다운. 빈도 임계값(예: 3회 이상) 이상인 단어만 표시.</div></div>
   </div>
 
 </div>
@@ -1906,6 +2035,71 @@ body {
 </div>
 
 <script>
+// ===== 키워드 시그널 툴팁 =====
+const stageLabels = {
+  l1: 'L1 리드 인입',
+  l3: 'L3 미팅 진행',
+  l5: 'L5 프로젝트 착수',
+  l7: 'L7 운영 중'
+};
+const stageColors = {
+  l1: '#6B7280', l3: '#E94B6A', l5: '#6B7280', l7: '#1F1F1F'
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const tooltip = document.getElementById('kw-tooltip');
+  const ttTitle = document.getElementById('kw-tooltip-title');
+  const ttBody  = document.getElementById('kw-tooltip-body');
+  const maxVal  = 8;
+
+  document.querySelectorAll('.kw-chip').forEach(chip => {
+    chip.addEventListener('click', e => {
+      e.stopPropagation();
+      const kw   = chip.dataset.kw;
+      const cat  = chip.dataset.cat;
+      const vals = { l1: +chip.dataset.l1, l3: +chip.dataset.l3, l5: +chip.dataset.l5, l7: +chip.dataset.l7 };
+      const catColor = cat === 'issue' ? '#DC2626' : cat === 'feature' ? '#2563EB' : '#4B5563';
+
+      ttTitle.textContent = kw;
+      ttTitle.style.color = catColor;
+
+      // 출처 리드 태그
+      const companies = chip.dataset.companies ? chip.dataset.companies.split(',') : [];
+      const companyColors = { '하나은행': '#6D28D9', 'SK렌터카': '#065F46', '가온전선': '#92400E' };
+      const companyBg    = { '하나은행': '#EDE9FE', 'SK렌터카': '#D1FAE5', '가온전선': '#FEF3C7' };
+      const companyTags = companies.map(c =>
+        `<span style="font-size:11px; font-weight:600; padding:2px 8px; border-radius:4px; background:${companyBg[c]||'#F3F4F6'}; color:${companyColors[c]||'#374151'};">${c}</span>`
+      ).join('');
+
+      ttBody.innerHTML = `
+        <div style="margin-bottom:10px;">
+          <div style="font-size:10px; color:#9CA3AF; margin-bottom:6px;">출처 리드</div>
+          <div style="display:flex; flex-wrap:wrap; gap:4px;">${companyTags}</div>
+        </div>
+        <div style="font-size:10px; color:#9CA3AF; margin-bottom:6px;">단계별 언급 횟수</div>` +
+      Object.entries(vals).map(([k, v]) => {
+        const pct = Math.round((v / maxVal) * 100);
+        return `
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:11px; color:#6B7280; width:110px; flex-shrink:0;">${stageLabels[k]}</span>
+            <div style="flex:1; background:#F3F4F6; border-radius:4px; height:8px; overflow:hidden;">
+              <div style="width:${pct}%; background:${v > 0 ? catColor : '#E5E7EB'}; height:100%; border-radius:4px;"></div>
+            </div>
+            <span style="font-size:12px; font-weight:600; color:${v > 0 ? '#1F1F1F' : '#9CA3AF'}; width:24px; text-align:right;">${v}회</span>
+          </div>`;
+      }).join('');
+
+      const rect = chip.getBoundingClientRect();
+      tooltip.style.display = 'block';
+      const tLeft = Math.min(rect.right + 8, window.innerWidth - 260);
+      tooltip.style.left = tLeft + 'px';
+      tooltip.style.top  = Math.max(rect.top - 20, 8) + 'px';
+    });
+  });
+
+  document.addEventListener('click', () => { tooltip.style.display = 'none'; });
+});
+
 function switchScreen(screenId, caseId) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
